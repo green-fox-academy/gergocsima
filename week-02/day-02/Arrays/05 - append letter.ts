@@ -11,4 +11,12 @@ function appendA() {
 }
 appendA();
 // The output should be: 'boa', 'anaconda', 'koala', 'panda', 'zebra'
+
+
+function appendB() {
+    far.forEach(element => {
+        console.log(element + aToAdd);
+})}
+appendB();
+
 export = appendA;
