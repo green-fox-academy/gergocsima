@@ -13,5 +13,5 @@ else if (firstList.length<secpondList.length){
     console.log("secondlist is bigger");
 }
 else {
-    console.log('The two list contains the same number of elements.');
+    console.log('The two list contains the same number of elements.'); // if the element number are the same
 }
