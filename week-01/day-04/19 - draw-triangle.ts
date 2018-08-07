@@ -38,3 +38,5 @@ for (let i: number = 0; i <repeatNr;i++)
     star=star+'*';
 console.log(star);
 }
+
+//two solutions
