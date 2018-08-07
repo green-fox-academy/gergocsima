@@ -4,6 +4,7 @@
 //     -  Prepare for the special case when no parameters are given
 // -  Greet `name`
 //
+
 export { }
 
 var name: string = 'Greenfox';
