@@ -5,21 +5,37 @@
   src: local('Merriweather Regular'), local('Merriweather-Regular'), url(https://fonts.gstatic.com/s/merriweather/v19/u-440qyriQwlOrhSvowK_l5-fCZMdeX3rg.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
-#links a{
-    vertical-align: middle;
+li {
+    display: inline-block;
+    margin-top: 10;
+    margin-right:10% 10% 0 10%;
+    text-align: bottom;
+    float: right;
+}
+a{
+    display: inline ;
+    color:#ff0099;
     width: 100%;
     height: min-content;
-    text-align: right;
-    color: #ff0099;
     text-decoration: underline;
     text-transform: uppercase;
-    font-size: 24px;
+    font-size: 18px;
     float: right;;
-    margin: 10px;
-    padding:0 10 0 10;
+    padding:0 0 0 10;
+}
+#linkedin{
+margin-right: 0%;
+}
+
+#about me {
+    margin-right: 20%;
+    padding: 0 10% 0 10%;
 }
 p {
     padding: 0 10 0 10%;
+    margin-right: 10%;
+    line-height: 30px;
+    font-family: consolas, courier;
 }
 #top {
     height: 40px;
@@ -27,20 +43,34 @@ p {
 }
  
 h1 {
-    font-family: Merriweather, normal;
-    padding:0 10 0 10%;
+    font-family: 'Varela Round', sans-serif;
+    margin-top: 10%;
+    margin-bottom: 5%;
+    padding:0 10% 0 10%;
 }
 
 h2 {
     color: #ff0099;
-    padding:0 10 0 10%;
+    padding:0 10% 0 10%;
+    font-family: 'Varela Round', sans-serif;
+}
+h3 {
+    padding: 0 10% 0 10%;
+    font-family: 'Varela Round', sans-serif;
 }
 
 #separator {
-    margin: auto;
-    width: fit-content;
+    padding:0 10% 0 10%;
+    text-align: center;
     }
 
-#wiki {
-    padding: 0 10 0 10%;
+body {
+    padding: 0;
+    font-family: consolas 'Courier New', Courier, monospace;
+    margin: 0 0 0 0;
 }
+.css-selector {
+    font-family: 'Varela', Round;
+  }
+
+  
