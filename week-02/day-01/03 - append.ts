@@ -2,6 +2,7 @@
 // -  Write a function called `appendAFunc` that gets a string as an input,
 //    appends an 'a' character to its end and returns with a string
 // -  Print the result of `appendAFunc(typo)`
+//
 export{}
 var typo: string = 'Chinchill';
 
