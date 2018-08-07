@@ -7,10 +7,11 @@ let example: string = 'In a dishwasher far far away';
 // Expected ouput: In a galaxy far far away
 console.log(example);
 
-let stringToReplace: string = /diswasher/gi;
-let stringToInsert: string = 'galaxy';
-var nwestring: string = example.replace(stringToReplace,'galaxy');
+let stringToReplace ="dishwasher";
+let stringToInsert ="galaxy";
+let nwestring = example.replace(stringToReplace,stringToInsert);
 console.log(nwestring);
+console.log(example.replace(stringToReplace,stringToInsert));
 export = example;
 
 var re = /dishwasher/gi; 
