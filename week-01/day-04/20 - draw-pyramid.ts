@@ -1,5 +1,5 @@
 'use strict';
-export{}
+export { }
 
 let lineCount: number = 4;
 
@@ -52,7 +52,19 @@ for (let j: number = 0; j < times; j++) {
 let spacesign: string = 'l'
 let sign: string = 'o';
 
-for (let w: number = 0; w <lineCount;w++) {
+for (let w: number = 0; w < lineCount; w++) {
     console.log(spacesign)
-    spacesign=spacesign+'l';
+    spacesign = spacesign + 'l';
+}
+
+//next solution:
+let repeatationNR: number = 5;
+let characterToPrint: string = '';
+let characterOther: string = '';
+for (let i: number = repeatationNR; i <= 0; i--) {
+    for (let j: number = 0; j>=repeatationNR;j++)
+    {
+    characterToPrint = characterToPrint + 'b';
+    console.log(characterToPrint);
+}
 }
