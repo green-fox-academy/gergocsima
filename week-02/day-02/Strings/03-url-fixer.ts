@@ -9,9 +9,9 @@ let stringToReplace = 'bots';
 let stringToInsert = 'odds';
 let newstring = url.replace(stringToReplace, stringToInsert);
 console.log(newstring);
-var b = ":";
-var position = 5;
-var output = [url.slice(0, position), b, url.slice(position)].join('');
+let b = ":";
+let position = 5;
+let output = [url.slice(0, position), b, url.slice(position)].join('');
 
 url === output;
 console.log(url);

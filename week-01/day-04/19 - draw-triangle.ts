@@ -44,6 +44,6 @@ let lineCounter: number = 4;
 let starVersionThird: string = '*';
 while (lineCounter > 0) {
   console.log(starVersionThird);
-  starVersionThird +='*';
+  starVersionThird += '*';
   lineCounter--;
 }
