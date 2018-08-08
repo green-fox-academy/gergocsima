@@ -33,10 +33,17 @@ for (let i: number = 0; i <= lineCount2; i++) {
 console.log('handling string with variables:')
 let repeatNr: number = 4;
 let star: string = '';
-for (let i: number = 0; i <repeatNr;i++)
-{
-    star=star+'*';
-console.log(star);
+for (let i: number = 0; i < repeatNr; i++) {
+  star = star + '*';
+  console.log(star);
 }
 
-//two solutions
+//third solutions
+console.log('using while:')
+let lineCounter: number = 4;
+let starVersionThird: string = '*';
+while (lineCounter > 0) {
+  console.log(starVersionThird);
+  starVersionThird +='*';
+  lineCounter--;
+}
