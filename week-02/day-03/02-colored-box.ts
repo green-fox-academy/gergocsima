@@ -1,5 +1,5 @@
 'use strict';
-
+export{}
 const canvas = document.querySelector('.main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
@@ -66,4 +66,4 @@ ctx.stroke();
 ctx.strokeStyle = "orange";
 ctx.lineTo(placeToDrawX, placeToDrawY);
 ctx.stroke();
-ctx.closePath();
+ctx.closePath();*/

@@ -1,5 +1,5 @@
 'use strict';
-
+export{}
 const canvas = document.querySelector('.main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 
@@ -11,15 +11,15 @@ const ctx = canvas.getContext('2d');
 
 let x: number = 100;
 let y: number = 10;
-let width: number = 600;
-let heigth: number = 400;
+//let width: number = 600;
+//let heigth: number = 400;
 let repetition: number = 3;
 
 function lineDrawing(f:number, g:number) {
     ctx.strokeStyle = "cyan";
     ctx.beginPath();
     ctx.moveTo(f, g);
-    ctx.lineTo(width / 2, heigth/2);
+    ctx.lineTo(canvas.width / 2, canvas.height/2);
     ctx.stroke();
     ctx.closePath();
 }
@@ -39,6 +39,6 @@ for (let i: number = repetition+1; i >= 0; i--) {
     ctx.stroke();
     ctx.clip();
     /*ctx.moveTo(0, 0);
-    ctx.closePath();*/
+    ctx.closePath();
 
-}
+}*/
