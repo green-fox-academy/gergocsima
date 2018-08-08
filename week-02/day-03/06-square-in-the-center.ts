@@ -1,5 +1,4 @@
 'use strict';
-export{}
 
 const canvas = document.querySelector('.main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
@@ -9,9 +8,7 @@ const ctx = canvas.getContext('2d');
 //Canvas size
 
 let sideLength: number = 100;
-let x: number =0;
-let y: number =0;
 
 // Draw a colored square
 ctx.fillStyle = 'green';
-ctx.fillRect(x, y, sideLength, sideLength);
+ctx.fillRect((canvas.width-sideLength)/2, (canvas.height-sideLength)/2, sideLength, sideLength);
