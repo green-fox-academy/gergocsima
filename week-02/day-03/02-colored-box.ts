@@ -5,9 +5,9 @@ const ctx = canvas.getContext('2d');
 
 // DO NOT TOUCH THE CODE ABOVE THIS LINE
 // draw a box that has different colored lines on each edge.
-let sideA: number = 200;
+let sideA: number = 100;
 let sideB: number = 200;
-let placeToDrawX: number = 100; // x coordinate of the start point
+let placeToDrawX: number = 60; // x coordinate of the start point
 let placeToDrawY: number = 100; // y coordinate of the start point
 
 
@@ -26,9 +26,9 @@ ctx.stroke();
 ctx.closePath();
 
 ctx.beginPath(); // define the place where to start to draw the rectangle
-ctx.strokeStyle = "cian";
-ctx.moveTo(placeToDrawX+sideA,placeToDrawY+sideB);
-ctx.lineTo(placeToDrawY,placeToDrawX+sideB);
+ctx.strokeStyle = "green";
+ctx.moveTo(placeToDrawX,placeToDrawY+sideB);
+ctx.lineTo(placeToDrawX+sideA,placeToDrawY+sideB);
 ctx.stroke();
 ctx.closePath();
 
