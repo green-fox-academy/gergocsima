@@ -14,7 +14,7 @@ let lineCount: number = 4;
 // The pyramid should have as many lines as lineCount is
 // helper for me - Version1
 
-let space: string = '----';
+/*let space: string = '----';used for visualization
 let star: string = '*';
 
 for (let i: number = 0; i < lineCount; i++) {
@@ -22,49 +22,32 @@ for (let i: number = 0; i < lineCount; i++) {
     space = space.slice(0, -1)
     star += '**'
 }
-//-to generate the desired one with .slice
-let space2: string = '    '; /* 4 pcs of spaces, shame:((*/
-let star2: string = '*';
+*/
+console.log('SOLUTION 01:Pyramid drawing wit simple predefined characters using .slice');
+let spaceSt: string = '    '; // 4 pcs of spaces used for declare string
+let starSt: string = '*';
 
 for (let i: number = 0; i < lineCount; i++) {
-    console.log(space2, star2);
-    space2 = space2.slice(0, -1)
-    star2 += '**'
+    console.log(spaceSt, starSt);
+    spaceSt = spaceSt.slice(0, -1);
+    starSt += '**'
 }
+console.log('______________________________');
 
-//2nd solution with while
+/* console.log('SOLUTION 02: solution with while');
 
 let times: number = 4;
-let repeatedString1: string = '';
-let repeatedString2: string = '*';
+let repeatedString1: string = '---';
+let repeatedString2: string = '';
 
-for (let j: number = 0; j < times; j++) {
 
-    while (times > 1) {
-        repeatedString1 += '-';
-        times--;
-        repeatedString2 += '*'
-        times--;
+while (times > 0) {
+    for (let i: number = 0; i < times; i++) {
+        repeatedString1 = repeatedString1.slice(0, -1);
     }
-    console.log(repeatedString1 + repeatedString2);
+    repeatedString2 += '*';
+    console.log(repeatedString1, repeatedString2);
+    times--;
 }
 
-let spacesign: string = 'l'
-let sign: string = 'o';
-
-for (let w: number = 0; w < lineCount; w++) {
-    console.log(spacesign)
-    spacesign = spacesign + 'l';
-}
-
-//next solution:
-let repeatationNR: number = 5;
-let characterToPrint: string = '';
-let characterOther: string = '';
-for (let i: number = repeatationNR; i <= 0; i--) {
-    for (let j: number = 0; j>=repeatationNR;j++)
-    {
-    characterToPrint = characterToPrint + 'b';
-    console.log(characterToPrint);
-}
-}
+ */
