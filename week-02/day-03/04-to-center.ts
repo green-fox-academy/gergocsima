@@ -15,10 +15,10 @@ let width: number = 600;
 let heigth: number = 400;
 let repetition: number = 3;
 
-function lineDrawing(x, y) {
+function lineDrawing(f:number, g:number) {
     ctx.strokeStyle = "cyan";
     ctx.beginPath();
-    ctx.moveTo(x, y);
+    ctx.moveTo(f, g);
     ctx.lineTo(width / 2, heigth/2);
     ctx.stroke();
     ctx.closePath();
