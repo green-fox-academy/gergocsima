@@ -16,7 +16,7 @@ let sideLengthB: number = sideLengthA * 1.2;
 
 
 for (let r: number =0;r<= rectangleNr;r++) {
-    ctx.fillStyle = 'rgb(' + Math.floor(255 - 42.5 * r) + ',' + Math.floor(255 - 42.5 * r) + ',0)'
+    ctx.fillStyle='rgb('+ Math.floor(Math.random() * 255) + ','+ Math.floor(Math.random() * 255) + ','+ Math.floor(Math.random() * 255) + ')';
 //    ctx.fillStyle='blue';
     ctx.fillRect(rectangleNr*(10+r*3),(rectangleNr+1)*(10*(r+3)),rectangleNr*(10*r),rectangleNr*(10/r));
 }
