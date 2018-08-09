@@ -12,11 +12,11 @@ const ctx = canvas.getContext('2d');
 
 //parameter given
 
-let size: number = 80;
+let size: number = 100;
 
 //function drawing square
 
-function squareDrawing(x: number) {
+/*function squareDrawing(x: number) {
     //    random color generator
     ctx.fillStyle = 'rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ')';
     ctx.fillRect(canvas.width / 2 - size / 2, canvas.height / 2 - size / 2, x, x);
@@ -25,5 +25,16 @@ function squareDrawing(x: number) {
 
 for (let i: number = 0; i < 3; i++) {
     squareDrawing(size);
-    size=size-10;
+    size = size - 10;
 }
+*/
+
+
+function squareDrawing(x: number) {
+    for (let i: number = 0; i < 3; i++) {
+        ctx.fillStyle = 'rgb(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ')';
+        ctx.fillRect(canvas.width / 2 - size / 2, canvas.height / 2 - size / 2, size, size);
+        size = size - (size/3);
+    }
+}
+squareDrawing(size);
