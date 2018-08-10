@@ -16,7 +16,7 @@ let addedColour1 = [desiredColour1];
 let desiredColour2: string = 'orange';
 let addedColour2 = [desiredColour2];
 
-//draw 1 line
+//draw lines one side
 function drawLine(lineNumber) {
     for (let i: number = 1; i < lineNumber; i++) {
         ctx.beginPath();
@@ -25,6 +25,24 @@ function drawLine(lineNumber) {
         ctx.lineTo(canvasWidth, endY * i);
         ctx.stroke();
         ctx.closePath();
+        ctx.beginPath();
+        ctx.strokeStyle = addedColour2;
+        ctx.moveTo(0, (canvasHeight / lineNumber)*i);
+        ctx.lineTo(canvasWidth/lineNumber*i, canvasHeight);
+        ctx.stroke();
+        ctx.closePath();
     }
 }
-drawLine(12);
+drawLine(lineNumber);
+
+/*function drawLine(lineNumber) {
+    for (let i: number = 1; i < lineNumber; i++) {
+        ctx.beginPath();
+        ctx.strokeStyle = addedColour1;
+        ctx.moveTo(0, (canvasHeight / lineNumber)*i);
+        ctx.lineTo(canvasWidth/lineNumber*i, canvasHeight);
+        ctx.stroke();
+        ctx.closePath();
+    }
+}
+drawLine(lineNumber);
