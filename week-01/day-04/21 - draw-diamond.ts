@@ -1,6 +1,6 @@
 'use strict';
 
-let lineCount: number = 9;
+let lineCount: number = 12;
 
 // Write a program that draws a
 // diamond like this:
@@ -20,7 +20,7 @@ let starSt: string = '*';
 //let i: number = 0;
 //let j: number = 0;
 
-console.log(spaceSt.length)
+//console.log(spaceSt.length)
 if (lineCount > 7) {
     for (let l: number = 0; l <= lineCount - 7; l++) {
         spaceSt += ' ';
