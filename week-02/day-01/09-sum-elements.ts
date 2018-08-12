@@ -2,9 +2,9 @@
 // -  Print the sum of the second and the third element
 //
 
-var r = [54, 23, 66, 12];
-var selectedElementOne: number = 2;
-var selectedElementTwo: number = 3;
+let r = [54, 23, 66, 12];
+let selectedElementOne: number = 2;
+let selectedElementTwo: number = 3;
 /*console.log(r[selectedElementOne - 1]);*/
 /*console.log(r[selectedElementTwo - 1]);*/
 
