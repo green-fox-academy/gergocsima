@@ -12,7 +12,7 @@
 //  % % % %
 //
 
-let lineCount: number = 10;
+let lineCount: number = 7; // number could increased decreased
 let brick: string = '%';
 let space: string = ' ';
 let lineA: string = '';
@@ -31,7 +31,7 @@ for (let k: number = 0; k < lineCount / 2; k++) {
     //line = line + brick + space;
     //console.log(line);
 } //console.log(lineB);
-
+//cyle make lineCount numbers of line size chessTable
 for (let j: number = 0; j <= lineCount - 1; j++) {
     if (j % 2 == 0) {
         console.log(lineB);
