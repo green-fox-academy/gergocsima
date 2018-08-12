@@ -7,7 +7,7 @@
 
 export { }
 
-var name: string = 'Greenfox';
+let name: string = 'Greenfox';
 function greet(name: string) {
     if (name == '') {
         console.log('name');
