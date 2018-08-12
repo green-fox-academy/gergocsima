@@ -3,12 +3,11 @@
 const canvas = document.querySelector('.main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
 let scaleDownRation: number = 2;
-let canvasWidth: number = canvas.width/scaleDownRation;
-let canvasHeight: number = canvas.height/scaleDownRation;
+let positioning: number =200;
+let canvasWidth: number = canvas.width / scaleDownRation;
+let canvasHeight: number = canvas.height / scaleDownRation;
 let lineNumber: number = 20;
-let quarterstartX: number = (canvasWidth /4)/ lineNumber;
-let quarterstartY: number = (canvasHeight /4)/lineNumber;
-let startY: number = 0;
+let startY: number = 0+positioning;
 let startX: number = canvasWidth / lineNumber;
 let endY: number = canvasHeight / lineNumber;
 // colour of your choice
@@ -24,10 +23,10 @@ function drawLine(lineNumber) {
         ctx.beginPath();
         ctx.strokeStyle = addedColour1;
         ctx.moveTo(startX * i, startY);
-        ctx.lineTo(canvasWidth, endY * i);
+        ctx.lineTo(canvasWidth, endY * i+positioning);
         ctx.stroke();
         ctx.closePath();
-        
+
     }
 }
 drawLine(lineNumber);
