@@ -2,10 +2,10 @@
 
 const canvas = document.querySelector('.main-canvas') as HTMLCanvasElement;
 const ctx = canvas.getContext('2d');
-
-let canvasWidth: number = canvas.width;
-let canvasHeight: number = canvas.height;
-let lineNumber: number = 14;
+let scaleDownRation: number = 2;
+let canvasWidth: number = canvas.width/scaleDownRation;
+let canvasHeight: number = canvas.height/scaleDownRation;
+let lineNumber: number = 20;
 let quarterstartX: number = (canvasWidth /4)/ lineNumber;
 let quarterstartY: number = (canvasHeight /4)/lineNumber;
 let startY: number = 0;
