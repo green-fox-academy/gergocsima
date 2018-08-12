@@ -6,7 +6,7 @@ let scaleDownRation: number = 2;
 let positioning: number =200;
 let canvasWidth: number = canvas.width / scaleDownRation;
 let canvasHeight: number = canvas.height / scaleDownRation;
-let lineNumber: number = 40;
+let lineNumber: number = 14;
 let startY: number = 0+positioning;
 let startX: number = canvasWidth / lineNumber;
 let endY: number = canvasHeight / lineNumber;
@@ -23,7 +23,7 @@ let addedColour4 = [desiredColour4];
 
 //3rd quarter of the star
 function drawLine3rdQ(lineNumber) {
-    for (let i: number = 1; i < lineNumber; i++) {
+    for (let i: number = 1; i <= lineNumber; i++) {
         ctx.beginPath();
         ctx.strokeStyle = addedColour1;
         ctx.moveTo(startX * i, startY);
@@ -37,7 +37,7 @@ drawLine3rdQ(lineNumber);
 
 //3rd quarter of the star
 function drawLine4thQ(lineNumber) {
-    for (let i: number = 1; i < lineNumber; i++) {
+    for (let i: number = 1; i <= lineNumber; i++) {
         ctx.beginPath();
         ctx.strokeStyle = addedColour1;
         ctx.moveTo(startX * i, startY);
@@ -66,7 +66,7 @@ drawLine2ndQ(lineNumber);
 
 //2nd quarter of the star
 function drawLine1stQ(lineNumber) {
-    for (let i: number = 1; i < lineNumber; i++) {
+    for (let i: number = 1; i <= lineNumber; i++) {
         ctx.beginPath();
         ctx.strokeStyle = addedColour2;
         ctx.moveTo(canvasWidth, endY * i+positioning);
