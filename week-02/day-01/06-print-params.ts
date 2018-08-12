@@ -5,7 +5,7 @@
 export { }
 
 function printParamsFirst (...inputs:any[]) {
-    for (var i = 0; i < inputs.length; i++) {
+    for (let i = 0; i < inputs.length; i++) {
 console.log(inputs[i]); 
 
 }
