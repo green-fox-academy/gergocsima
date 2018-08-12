@@ -2,7 +2,7 @@
 //    that returns it's input's factorial
 
 export { }
-var inputNr: number = 5;
+let inputNr: number = 5;
 function factorio(inputNr: number) {
     let summ: number = 1;
     for (let i: number = inputNr; i >0; i--) {
