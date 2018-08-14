@@ -1,15 +1,38 @@
 'use strict';
+declare function require(path: string): any;
+export {};
 
-export{};
-const charEncoding='utf-8';
 const fs = require('fs');
-function readFromFile (fileName: string):string {
+
+const charEncoding = 'utf-8';
+
+function readFromFile(fileName: string): string {
   try {
-    return fs.readFileSync(fileName,charEncoding);
-  }catch (e) {
+    return fs.readFileSync(fileName, charEncoding);
+  } catch (e) {
     console.log(e.message);
     return null;
   }
 }
 
-console.log(readFromFile('hell.txt'));
+function writeToAFile(fileName: string, data: any): void {
+  fs.writeFileSync(fileName, data);
+}
+
+function countChar(char: string): number {
+  let result: number = 0;
+  const fileContent: string = readFromFile('hello.txt');
+  if (fileContent !== null) {
+    fileContent.split('\r\n').forEach(e => {
+      e.split('').forEach(elem => {
+        if(elem === char) {
+          result ++;
+        }
+      })
+    });
+    writeToAFile('result.txt', result);
+    return result;
+  }
+}
+
+console.log(countChar('a'));
