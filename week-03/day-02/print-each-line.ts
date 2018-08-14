@@ -9,12 +9,23 @@ export { };
 
 const charEncoding = 'utf-8';
 const fs = require('fs');
+
 function readLines(x: string) {
   try {
     return fs.readFileSync(x, charEncoding);
   } catch (error) {
-console.log('Unable to read file:'+x)
+return ('Unable to read file:'+x);
   }
 }
 console.log(readLines('my-fil.txt'));
 
+/* function readLines(x: string) {
+  try {
+    if(fs.readFileSync())
+    throw new Error ('Unable to read file:'+x);
+    return fs.readFileSync(x, charEncoding);
+  } catch (error) {
+console.log('Unable to read file:'+x);
+  }
+}
+console.log(readLines('my-file.txt')); */
