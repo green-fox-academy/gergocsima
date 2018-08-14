@@ -3,11 +3,19 @@
 // and prints the result.
 // It should print 'fail' if the parameter is 0
 
-let input: number = 10;
+let input: number = 0;
 
-function divider(x: number):number { 
-let result=10/x;
-console.log(result);
+function divider(x: number) {
+  try {
+    if (x === 0) {
+      return 'fail'
+    }
+    let result = 10 / x;
+    return result;
+
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-divider(input);
+console.log(divider(input));
