@@ -13,7 +13,7 @@ const fs = require('fs');
 const charEncoding = 'utf-8';
 
 let path: string='';//describes the location of the file
-let word:string ='dogz™';//that will be written to the file as lines
+let word:string ='dogz™catZ';//that will be written to the file as lines
 let numberAdded: number =5;//how many lines the file should have
 
 function readFromFile(fileName: string): string {
@@ -31,5 +31,5 @@ for (let i:number =0;i<numberAdded;i++) {
 }
 }
 
-let fileName: string = 'my-file.txt';
+let fileName: string = 'my-file.tx';
 writeToAFile(fileName,word,numberAdded);

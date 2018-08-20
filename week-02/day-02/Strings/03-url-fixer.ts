@@ -15,3 +15,14 @@ let output = [url.slice(0, position), b, url.slice(position)].join('');
 
 url === output;
 console.log(url);
+
+// second solution without 'www' cheker extension
+let stringToReplaceV2: string = 'bots';
+let stringToUseV2: string = 'odds';
+let urlStartV2: string = 'https://';
+let urlV2: string = 'https//www.reddit.com/r/nevertellmethebots';
+urlV2 = urlV2.replace(stringToReplaceV2,stringToUseV2);
+if (urlV2.match(urlStartV2)==null) {
+  urlV2=urlStartV2.concat(urlV2.slice(urlV2.indexOf('www'),urlV2.length));
+}
+console.log(urlV2);

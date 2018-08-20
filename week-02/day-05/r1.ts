@@ -5,7 +5,7 @@ const ctx = canvas.getContext('2d');
 
 let canvasWidth: number = canvas.width;
 let canvasHeight: number = canvas.height;
-let lineNumber: number = 14;
+let lineNumber: number = 40;
 let startX: number = canvasWidth / lineNumber;
 let endY: number = canvasHeight / lineNumber;
 let startY: number = 0;
@@ -16,7 +16,7 @@ let addedColour1 = [desiredColour1];
 let desiredColour2: string = 'orange';
 let addedColour2 = [desiredColour2];
 
-//draw lines one side
+//draw lines both sides
 function drawLine(lineNumber) {
     for (let i: number = 1; i < lineNumber; i++) {
         ctx.beginPath();

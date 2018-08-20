@@ -23,30 +23,14 @@ let numberOfTriangleLines: number = 2;
 function drawTriangle(x: number) {
     for (let i: number = 1; i < numberOfTriangleLines; i++) {
         ctx.beginPath();
-        ctx.moveTo(startX, startY-(triangleHeight*i));
+        ctx.moveTo(startX, startY;
         ctx.strokeStyle = addedColour;
         ctx.lineTo(startX + triangleSide / 2, triangleHeight + startY);
         ctx.lineTo(startX - triangleSide / 2, startY + triangleHeight);
         ctx.lineTo(startX, startY);
         ctx.stroke();
         ctx.closePath();
- 
-drawTriangle(triangleSide);   }
+   }
 }
 
 drawTriangle(triangleSide); 
-
-
-
-
-
-/*
-function drawTriangle(x: number) {
-    for (let i: number = 0; i < numbersOfSquares; i++) {
-        ctx.fillStyle = 'purple';
-        ctx.fillRect(xY, xY, sideLength, sideLength);
-        xY = xY+sideLength;
-        sideLength = sideLength * sizeRatio;
-    }
-}
-squareDrawing(sideLength);*/

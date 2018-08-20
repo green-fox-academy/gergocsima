@@ -18,19 +18,23 @@ let brick: string = '';
 let space: string = '';
 
 
-// bricks increasing as lineCount
+// bricks increasing as lineCount - first line
 for (let k: number = 0; k <= lineCount - 1; k++) {
     brick = brick + '%';
 }
 console.log(brick);
-// increasing space if lineCount increased
+// increasing space if lineCount increased - inside
+//brick = brick.slice(0, 0);
 for (let l: number = 0; l <= lineCount - 5; l++) {
-    space = space + ' ';
+    space = space + brick;
 }
-for (let m: number = 0; m < lineCount - 2; m++) {
-    console.log(brick.slice(0, 1), space, brick.slice(0, 1));
-}
-// bricks increasing as lineCount
+
+/* for (let m: number = 0; m < lineCount - 2; m++) { */
+    for (let i: number = 0; i <= lineCount - 2; i++) {
+        console.log(brick.slice(0, 1), space.slice(i++, i++), /* brick.slice(0, 1),space.slice(0, i++) */);
+    }
+/* } */
+// bricks increasing as lineCount - last line
 brick = brick.slice(0, 1); //reset the state of the bricks
 for (let n: number = 0; n <= lineCount - 2; n++) {
 
@@ -38,12 +42,3 @@ for (let n: number = 0; n <= lineCount - 2; n++) {
 }
 console.log(brick);
 
-/* for (let i: number = 0; i <= lineCount; i++) {
-    if (i < lineCount || i > 0) {
-        for (let l: number = 0; l <= lineCount - 5; l++) {  // increasing space if lineCount increased
-            space = space + ' ';
-        }
-        console.log(brick.slice(0, 1), space, brick.slice(0, 1));
-
-    }}
- */

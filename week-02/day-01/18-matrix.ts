@@ -17,7 +17,7 @@ let matrixElementB: string ='1';
 let matrix =[[],[]];
 
 for (let i: number = 0; i <size-1;i++) {
-  let line = matrixElementA;
+  for (let j: number=0;j<=size;let line = matrixElementA;
   line=line+line;
   console.log(line);
 }//console.log(matrix.toString());

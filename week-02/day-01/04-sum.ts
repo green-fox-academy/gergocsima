@@ -3,7 +3,7 @@
 
 
 export{}
-var givenNumber: number = 10;
+let givenNumber: number = 10;
 
 function sum(givenNumber:number) {
     let summ: number = 0;

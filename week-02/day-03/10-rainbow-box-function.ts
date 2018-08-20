@@ -10,8 +10,8 @@ const ctx = canvas.getContext('2d');
 // Create a loop that fills the canvas with rainbow colored squares.
 
 //parameters given
-let desiredColour: string = 'White'; // the colour of your choice
-let size: number = 50; // due to the canvas size best wit this maximum parameter
+let desiredColour: string = 'blue'; // the colour of your choice
+let size: number = 25; // due to the canvas size best wit this maximum parameter
 
 let canvasWidth: number = canvas.width;
 let canvasHeight: number = canvas.height;
@@ -19,7 +19,6 @@ let addedColour =[desiredColour];
 let ratioCanvas: number = canvasWidth / canvasHeight;
 let middlePointX: number = canvasWidth / 2;
 let middlePointY: number = canvasHeight / 2;
-
 let rainbowColours: string[] = ['Violet', 'Indigo', 'Blue', 'Green', 'Yellow', 'Orange', 'Red'];
 
 //function for drawing square with two parameters

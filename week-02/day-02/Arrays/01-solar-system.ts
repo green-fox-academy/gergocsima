@@ -4,12 +4,12 @@
 // Create a function called putSaturn() which has list parameter and returns the correct list.
 // bonus for using some built in methods
 let planetList: string[] = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Uranus', 'Neptune'];
-function putSaturn () {
-planetList.push('Saturn');
-console.log(planetList);
+function putSaturn (list:any) {
+list.push('Saturn');
+console.log('\"'+planetList.join('\"\,"')+'\"');
 }
-putSaturn();
+putSaturn(planetList);
 // Expected output: "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Uranus", "Neptune", "Saturn"
-//console.log(putSaturn(planetList));
+export = putSaturn;
 
-//export = putSaturn;
+// onsole.log(planetList.join("\",\""));

@@ -16,4 +16,7 @@ let hashmap = {
   3: 'say goodbye '
 };
 
-console.log(out
+for (let i: number = 0; i <= notSoCrypticMessage.length; i++) {
+  out = out + hashmap[notSoCrypticMessage[i]];
+}
+console.log(out)

@@ -7,10 +7,10 @@ let sum: number = 0;
 
 
 function digitAdder(n: number) {
-  if ((n%10) == 0) {
+  if ((n % 10) == 0) {
     return 0;
-  }else {
-    return digitAdder((Math.floor(n-n%10))/10)+(n%10);
+  } else {
+    return digitAdder((Math.floor(n - n % 10)) / 10) + (n % 10);
   }
 }
 console.log(digitAdder(1234));

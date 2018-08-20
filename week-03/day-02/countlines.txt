@@ -1,0 +1,4 @@
+count lines 1
+count lines 2
+count lines 3
+count lines 4

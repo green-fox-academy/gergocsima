@@ -4,19 +4,25 @@ export { };
 // The parameter should be a list.
 let far: string[] = ['bo', 'anacond', 'koal', 'pand', 'zebr'];
 let aToAdd: string = 'a';
-function appendA() {
-    let output = far.map(x => x + aToAdd);
+function appendA(list2: any) {
+    let output = list2.map(x => x + aToAdd);
 
     console.log(output);
 }
-appendA();
+appendA(far);
 // The output should be: 'boa', 'anaconda', 'koala', 'panda', 'zebra'
 
 
-function appendB() {
-    far.forEach(element => {
+function appendB(list1: any) {
+    list1.forEach(element => {
         console.log(element + aToAdd);
 })}
-appendB();
+appendB(far);
 
 export = appendA;
+
+function appendC(list: any) {
+    list = list.join(aToAdd+',');
+    console.log(list+aToAdd);
+}
+appendC(far);
