@@ -15,7 +15,7 @@ export{}
 // Person(name, age, gender)
 // Person(): sets name to Jane Doe, age to 30, gender to female
 
-class Person {
+export class Person {
   name: string;
   age: number;
   gender: string;
