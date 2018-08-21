@@ -1,0 +1,1 @@
+this is the text what I moved from source file to dest file, with append function.
