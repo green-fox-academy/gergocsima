@@ -21,10 +21,6 @@ skipDays(numberOfDays){
 }
 }
 
-let studentgfa1: StudentGFA = new StudentGFA('G',34,'male','Intrexon',2);
-studentgfa1.introduce();
-studentgfa1.getGoal();
-studentgfa1.skipDays(2);
 // skippedDays: the number of days skipped from the course
 // Create a Student class that has the same fields and methods as the Person class, and has the following additional
 
