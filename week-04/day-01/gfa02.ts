@@ -5,7 +5,7 @@ export class StudentGFA extends PersonGFA {
 previousOrganization: string;
 skippedDays: number;
 
-constructor(name:string = 'Jane Doe', age: number = 30, gender: string = 'female', previousOrganization: string ='The school of life',skippedDays: number) {
+constructor(name:string = 'Jane Doe', age: number = 30, gender: string = 'female', previousOrganization: string ='The school of life',skippedDays?: number) {
 super(name, age, gender)  
 this.previousOrganization=previousOrganization;
 this.skippedDays=0;

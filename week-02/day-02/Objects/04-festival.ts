@@ -25,30 +25,37 @@ let enter: any = [];
 function securityCheck(list: any) {
   for (let i: number = 0; i < list.lenght; i++) {
     if (list[i].guns != 0) {
-      //watchlist= watchlist+queue[i];
-      watchlist.push(list.slice(0, i))
+      watchlist.push(list[i]);
     }
-    else if (list[i].alcohol > 0) {
-      securityAlcoholLoot = securityAlcoholLoot + list[i].alcohol;
+  }
+  for (let k: number = 0; k < list.lenght; k++) {
+    if (list[k].alcohol > 0) {
+      securityAlcoholLoot = securityAlcoholLoot + list[k].alcohol;
       //console.log(list[i].alcohol);
-      list[i].alcohol = 0;
-      enter=enter+list[i];
-      return securityAlcoholLoot;
+      list[k].alcohol = 0;
+      enter.push(list[k]);
+      //return securityAlcoholLoot;
     }
     else {
-      enter = enter + list[i]
-      return enter;
+      enter.push(list[k]);
     }
-
   }
-  console.log('Can eneter '+enter);
-  console.log('has gun '+watchlist);
-  console.log('Alcohol confiscated :'+securityAlcoholLoot)
+  console.log(enter);
+  //console.log('enter '+enter);
+  //console.log('has gun '+watchlist);
+  //onsole.log('Amount of alcohol confiscated :'+securityAlcoholLoot)
 }
-console.log(securityCheck(queue));
+/* console.log(queue[0].guns);
+console.log(queue[0].guns !=0);
+console.log(watchlist);
+watchlist.push(queue[0]);
+console.log(watchlist);
+console.log(queue[1].alcohol);
+queue[1].alcohol=0;
+console.log(queue[1].alcohol);
+console.log(enter);
+enter.push(queue[1]);
+console.log(enter); */
 
-//console.log(enter.push(queue.slice(0,1)));
-//console.log(queue[2].alcohol);
-//console.log(queue[0].alcohol=0);
-//console.log(queue[1]);
-//console.log(queue);
+securityCheck(queue);
+console.log(securityCheck(queue));
