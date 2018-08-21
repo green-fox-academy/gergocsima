@@ -10,3 +10,6 @@ export class Tree {
 
   }
 }
+
+let tree1: Tree = new Tree('red');
+console.log(tree1);
