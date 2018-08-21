@@ -39,7 +39,3 @@ export class PersonGFA {
     
   } */
 }
-
-let person1: PersonGFA = new PersonGFA('Aladin',333,'male');
-person1.introduce();
-person1.getGoal();
