@@ -12,9 +12,9 @@
 // Person(): sets name to Jane Doe, age to 30, gender to female
 'use strict';
 export class PersonGFA {
-  name: string;
-  age: number;
-  gender: string;
+  protected name: string;
+  protected age: number;
+  protected gender: string;
 
   constructor(name: string = 'Jane Doe', age: number = 30, gender: string = 'female') {
     if (gender === 'male' || gender === 'female') {
