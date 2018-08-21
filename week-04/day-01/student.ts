@@ -20,13 +20,14 @@ export class Student {
   age: number;
   gender: string;
   previousOrganization: string;
-  skippedDays: number = 0;
+  skippedDays: number;
 
-  constructor(name, age, gender, previousOrganization) {
+  constructor(name:string, age:number, gender:string, previousOrganization:string,skippedDays:number = 0) {
     this.name = name;
     this.age = age;
     this.gender = gender;
-    this.skippedDays = this.skippedDays;
+    this.previousOrganization =previousOrganization;
+    this.skippedDays=skippedDays;
 
   }
   getGoal() {
@@ -36,7 +37,7 @@ export class Student {
     console.log('Hi, I\'m ' + this.name + ', a ' + this.age + ' year old ' + this.gender + ' from ' + this.previousOrganization + ' who skipped ' + this.skippedDays + ' days from the course already.')
   }
   skipDays(numberOfDays: number) {
-    console.log(numberOfDays)
+    console.log(numberOfDays+this.skippedDays);
   }
 }
 let Student1: Student = new Student('Jane Doe', 30, 'female', 'The School of Life');
