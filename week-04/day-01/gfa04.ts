@@ -11,13 +11,14 @@
 
 // Sponsor(name, age, gender, company): beside the given parameters, it sets hiredStudents to 0
 // Sponsor(): sets name to Jane Doe, age to 30, gender to female, company to Google and hiredStudents to 0
-import { PersonGFA } from './gfa01'
+import { PersonGFA } from './gfa01';
+import { StudentGFA } from './gfa02';
 
 export class SponsorGFA extends PersonGFA {
   company: string;
   hiredStudents: number;
 
-  constructor(name: string, age: number, gender: string, company: string, hiredStudents: number){
+  constructor(name: string = 'jane Doe', age: number = 30, gender: string = 'female', company: string = 'Google', hiredStudents?: number){
     super(name, age, gender);
     this.company = company;
     this.hiredStudents = 0;
