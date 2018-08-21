@@ -13,6 +13,10 @@
 import { PersonGFA } from './gfa01'
 
 export class MentorGFA extends PersonGFA {
+  addMentor: any;
+  addStudent(arg0: any, arg1: any, arg2: any): any {
+    throw new Error("Method not implemented.");
+  }
   level: string;
   constructor(name: string = 'Jane Doe', age: number = 30, gender: string = 'female', level: string = 'intermediate') {
     super(name, age, gender)
@@ -32,6 +36,3 @@ export class MentorGFA extends PersonGFA {
   }
 }
 
-let mentor1: MentorGFA = new MentorGFA();
-mentor1.introduce();
-mentor1.getGoal();
