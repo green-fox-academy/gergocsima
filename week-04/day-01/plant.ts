@@ -1,4 +1,4 @@
-export class Flower {
+export class Plant {
   color: string;
   type: string;
   water: number;
@@ -15,9 +15,10 @@ waterUtilization:number;
     } else {
       this.waterUtilization=0.75;
  }
- this.water=water*waterUtilization
+    this.water=water*waterUtilization
   }
-  watering(waterAmount) {
-
   }
-}
+  let plant1: Plant= new Plant('yellow','flower');
+  let plant2: Plant= new Plant ('red','tree');
+  console.log(plant1);
+  console.log(plant2);
