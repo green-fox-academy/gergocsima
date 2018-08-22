@@ -1,4 +1,7 @@
-import
+import { BassGuitar } from "./Bassguitar";
+import { Violin } from "./violin";
+import { ElectricGuitar } from "./electricguitar";
+
 console.log('Test 1, create Electric Guitar, Bass Guitar and Violin with default strings.');
 let guitar = new ElectricGuitar();
 let bassGuitar = new BassGuitar();
