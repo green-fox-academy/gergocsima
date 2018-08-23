@@ -10,23 +10,26 @@ export class Animal {
   hungerValue: number = 0;
   thirstValue: number = 0;
 
-  constructor (hungerValue: number, thirstValue: number) {
+  constructor (hungerValue: number = 50, thirstValue: number = 50) {
     this.hungerValue = hungerValue;
     this.thirstValue = thirstValue;
   }
   eat(){
-    this.thirstValue-1;
+    return this.thirstValue--;
   }
   drink(){
-    this.hungerValue-1;
+    return this.hungerValue--;
   }
   play(){
-    this.hungerValue++
-    this.thirstValue++;
+    return this.hungerValue++,this.thirstValue++;
   }
 getHungry(){
 return  this.hungerValue;
 }
 }
 
-let Animal: Animal = new Animal()
+let Animal1: Animal = new Animal();
+Animal1.eat();
+Animal1.drink();
+
+console.log(Animal1);
