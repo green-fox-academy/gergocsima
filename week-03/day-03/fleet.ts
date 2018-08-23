@@ -10,7 +10,18 @@ class Fleet {
     add(thing: Thing) {
         this.things.push(thing);
     }
-    printIt()
+    printIt() {
+        this.things.forEach(element => {
+            let addThick: string = String(element.numberTag());
+            addThick += ' .';
+            if (element.finished() == true) {
+                addThick += '[x]';
+            } else {
+                addThick += '[ ]';
+            }
+            console.log(addThick, element, element.nameTag)
+        });
+    }
 }
 
 export { Fleet };
