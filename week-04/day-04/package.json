@@ -1,0 +1,15 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "simulation",
+  "main": "index.js",
+  "dependencies": {
+    "tape": "^4.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "testsimulation"
+  },
+  "author": "",
+  "license": "ISC"
+}
