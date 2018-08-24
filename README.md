@@ -4,12 +4,12 @@
 ---------------------------------------
 ### Alopex - Coffee
 
-[Gergely Csima - Green Fox Repository][1] - Here you can find **all** my works.
-[This is the patchwork ][2] - All the Git-it Workshop completers!
-[This is my first web page ][3] - I made it during the *workshop*.
+[Gergely Csima - Green Fox Repository][1] - Here you can find **all** my works.  
+[This is the patchwork ][2] - All the Git-it Workshop completers!  
+[This is my first web page ][3] - I made it during the *workshop*.  
 
-[This is my git lessons repository][4]
-[This is my To-Do list][5]
+[This is my git lessons repository][4]  
+[This is my To-Do list][5]  
 
 
 *I hope we will contribute in several awsome project in the future.*
