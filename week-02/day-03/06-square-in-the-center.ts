@@ -10,5 +10,8 @@ const ctx = canvas.getContext('2d');
 let sideLength: number = 100;
 
 // Draw a colored square
-ctx.fillStyle = 'green';
-ctx.fillRect((canvas.width-sideLength)/2, (canvas.height-sideLength)/2, sideLength, sideLength);
+/* ctx.fillStyle = 'green';
+ctx.fillRect((canvas.width-sideLength)/2, (canvas.height-sideLength)/2, sideLength, sideLength); */
+
+ctx.rect(10, 10, 100, 100);
+ctx.fill();

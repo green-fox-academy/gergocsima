@@ -6,7 +6,9 @@
   "dependencies": {
     "tape": "^4.9.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/tape": "^4.2.32"
+  },
   "scripts": {
     "test": "testsimulation"
   },

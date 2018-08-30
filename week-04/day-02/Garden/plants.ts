@@ -1,16 +1,14 @@
-import { Flower } from './flower' //replaced
+import { Flower } from './flower'
 import { Tree } from './tree'
-export class G extends Plants {
-  watering: number;
-  wateramount:number;
+export class Plants{
+  plants: [];
 
-  constructor (wateramount: number,watering?: number) {
-    super();
-    this.wateramount=wateramount;
-    this.watering=0;
+  constructor (plants: any) {
+    this.plants = plants
   }
-watering(waterAdded: number) {
-  this.wateramount=Plant
+plant(Flowers: Flower) {
+  this.plants.push(Flower);
+}
+}
 
-}
-}
+let plants: Pants = new Plants()

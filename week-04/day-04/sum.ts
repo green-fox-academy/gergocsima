@@ -1,4 +1,7 @@
 export class Sum {
+  fibonacciRec(): any {
+    throw new Error("Method not implemented.");
+  }
 protected a: any;
 protected b: any;
 constructor (a?: any, b?: any) {

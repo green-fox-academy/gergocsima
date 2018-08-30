@@ -1,8 +1,8 @@
 import { test } from 'tape';
-import * as firsttest from './firsttest';
+import { addNum, subNum } from './firsttest';
 
 test('add 2 numbers', t => {
-  const actual = firsttest.addNum(1, 2);
+  const actual = addNum(1, 2);
   const expected = 3;
 
   t.equal(actual, expected);
@@ -10,6 +10,6 @@ test('add 2 numbers', t => {
 });
 
 test('test subNum()', t => {
-  t.equal(firsttest.subNum(2, 1), 1);
+  t.equal(subNum(2, 1), 1);
   t.end();
 })

@@ -26,7 +26,7 @@ export function fibonacciRec(n) : any{
  }
 
 
- export let numberPair = fibonacciRec(2);
+export let numberPair = fibonacciRec(2);
 export let inputEmptyList = fibonacciRec([]);
 export let oneElement = fibonacciRec([4]);
 export let multyplyElements = fibonacciRec([1,2,3,4,5]);

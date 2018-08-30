@@ -7,9 +7,9 @@
 // which decreases inkAmountż
 
 export class Sharpie {
-  color: string;
-  width: number;
-  inkAmount: number;
+  protected color: string;
+  protected width: number;
+  protected inkAmount: number;
 
   constructor(color: string, width: number, inkAmount: number = 100) {
     this.color =color;
@@ -19,5 +19,19 @@ export class Sharpie {
     use() : number {
       return this.inkAmount-1
     }
-
+    colOR(): any {
+      return this.color;
+    }
+    inkVol(): any {
+      return this.inkAmount;
+    }
+    wide(): any {
+      return this.width;
 }
+
+export let numberPair = new Sharpie(1,2);
+export let inputEmptyList = new Sharpie([1],2);
+export let oneElement = new Sharpie([4]);
+export let multyplyElements = new Sharpie([1,2,3,4,5]);
+export let testNull = new Sharpie(null);
+export let testStringu = new Sharpie('valami');
