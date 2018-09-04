@@ -2,7 +2,7 @@ export class Pirate {
   name: string;
   alcLevel: number;
   status: boolean;
-  constructor(name: string, alcLevel: number = 0, status: boolean = true) {
+  constructor(name?: string, alcLevel: number = 0, status: boolean = true) {
     this.name = name;
     this.alcLevel = alcLevel;
     this.status = status;
