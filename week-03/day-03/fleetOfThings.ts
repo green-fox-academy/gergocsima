@@ -9,11 +9,18 @@ let milk: Thing = new Thing('Get milk');
 let obstacles: Thing = new Thing('Remove obstacles');
 let standUp: Thing = new Thing('Stand Up');
 let lunch: Thing = new Thing('Eat lunch');
-
-console.log(standUp.complete());
+fleet.add(milk);
+fleet.add(obstacles);
+fleet.add(standUp);
+fleet.add(lunch
+);
+standUp.complete();
 lunch.complete();
+//console.log(milk)
+fleet.print();
 
-console.log(fleet.print());
+
+
 /* Crete a fleet of things to have this output:
 1. [ ] Get milk
 2. [ ] Remove the obstacles

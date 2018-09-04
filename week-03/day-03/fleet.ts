@@ -10,15 +10,10 @@ class Fleet {
     add(thing: Thing) {
         this.things.push(thing);
     }
-    print(): string {
+    print() {
         for (let i: number = 0; i < this.things.length; i++) {
-            if (this.things[i].complete()) {
-                return `[x] ${this.things[i]}`
-            } else {
-                return `[ ] ${this.things[i]}`
-            }
+            console.log(`${this.things.indexOf(this.things[i]) + 1} ${this.things[i].returnStatus()} ${this.things[i].getName()}`);
         }
     }
 }
-
 export { Fleet };
