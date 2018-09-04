@@ -10,17 +10,14 @@ class Fleet {
     add(thing: Thing) {
         this.things.push(thing);
     }
-    printIt() {
-        this.things.forEach(element => {
-            let addThick: string = String(element.numberTag());
-            addThick += ' .';
-            if (element.finished() == true) {
-                addThick += '[x]';
+    print(): string {
+        for (let i: number = 0; i < this.things.length; i++) {
+            if (this.things[i].complete()) {
+                return `[x] ${this.things[i]}`
             } else {
-                addThick += '[ ]';
+                return `[ ] ${this.things[i]}`
             }
-            console.log(addThick, element, element.nameTag)
-        });
+        }
     }
 }
 
