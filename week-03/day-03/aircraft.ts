@@ -4,7 +4,6 @@ export class Aircraft {
   protected baseDamage: number;
   protected status: boolean;
   protected maxAmmo: number;
-  protected damage: number
   protected ammoStorage: number;
 
   constructor(type: string, maxAmmo: number, baseDamage: number) {
@@ -14,8 +13,9 @@ export class Aircraft {
     this.maxAmmo = maxAmmo;
   }
   fight(): number {
+    let damage: number = this.baseDamage * this.ammoAmount;
     if (this.ammoAmount != 0) {
-      return this.damage;
+      return damage;
     }
     this.ammoAmount = 0;
 
@@ -45,6 +45,7 @@ export class Aircraft {
     }
   }
   getDamage() {
+    return this.ammoAmount * this.baseDamage;
 
   }
 }

@@ -6,15 +6,17 @@ export class Carrier {
   ammoStoraged: number;
   healthPoint: number;
   ammoRemains: number;
-  allDamage: number;
+  startHealth: number;
+
 
   constructor(name: string, ammoStoraged: number = 2000, healthPoint: number = 1200) {
     this.name = name;
     this.ammoStoraged = ammoStoraged;
     this.healthPoint = healthPoint;
     this.ammoRemains = ammoStoraged;
-    this.allDamage = 0;
     this.flights = [];
+    this.startHealth = healthPoint;
+
   }
 
   add(aircrafToAdd: Aircraft): void {
@@ -34,16 +36,20 @@ export class Carrier {
       return 'The ship is empty...!'
     }
   }
-  fight(carrier: Carrier): any {
-    while (this.ammoStoraged > 0) {
-      carrier.flights.forEach((elem) => carrier.allDamage + elem.fight());
-    }
-    carrier.healthPoint -= carrier.allDamage
+  fight(carrier: Carrier): string {
+    let allDamage: number = 0;
+    this.flights.forEach(elem => allDamage += elem.fight());
+    carrier.healthPoint -= allDamage;
     if (carrier.healthPoint <= 0) {
       return `${carrier.name} : It's dead Jim`
     }
+    else {
+      return `${carrier.name}: Current status: ${carrier.healthPoint}`
+    }
   }
   getStatus(): string {
-    return `HP: ${this.healthPoint}, Aircraft count ${this.flights.length}, Ammo Storage: ${this.ammoStoraged}, Total damage: ${this.allDamage}\n ${this.flights.map((elem) => '\n' + elem.getStatus())}`;
+    let totalPotentialDamage: number = 0;
+    this.flights.forEach(elem => totalPotentialDamage += elem.getDamage());
+    return `HP: ${this.healthPoint}, Aircraft count ${this.flights.length}, Ammo Storage: ${this.ammoStoraged}, Total damage: ${totalPotentialDamage} \n ${this.flights.map((elem) => '\n' + elem.getStatus())} `;
   }
 }
