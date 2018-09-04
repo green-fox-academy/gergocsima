@@ -44,4 +44,7 @@ export class Aircraft {
       return false
     }
   }
+  getDamage() {
+
+  }
 }
