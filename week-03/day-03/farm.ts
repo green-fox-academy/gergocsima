@@ -14,21 +14,27 @@ class Fram {
     this.animalsOfFarm.push(animaladd);
   }
   slaughter(): any {
-    let minHunger: number = 0;
-    for (let i: number = 0; i < this.animalsOfFarm.length; i++) {
-      if (this.animalsOfFarm[i].hunger < this.animalsOfFarm[0].hunger) {
-        minHunger = this.animalsOfFarm[i].hunger
-      }
-    }
-    let remains: any[]
-    for (let j: number = 0; j < this.animalsOfFarm.length; j++) {
-      if (this.animalsOfFarm[j].hunger != minHunger) {
-        remains.push(this.animalsOfFarm[j]);
-      }
-    }
-    console.log(remains);
+    this.animalsOfFarm.sort((a, b) => {
+      return b.hunger - a.hunger
+    })
+    this.animalsOfFarm.splice(0, 1);
   }
 }
+// let minHunger: number = 0;
+// for (let i: number = 0; i < this.animalsOfFarm.length; i++) {
+//   if (this.animalsOfFarm[i].hunger < this.animalsOfFarm[0].hunger) {
+//     minHunger = this.animalsOfFarm[i].hunger
+//   }
+// }
+// let remains: any[]
+// for (let j: number = 0; j < this.animalsOfFarm.length; j++) {
+//   if (this.animalsOfFarm[j].hunger != minHunger) {
+//     remains.push(this.animalsOfFarm[j]);
+//   }
+// }
+// console.log(remains);
+//}}
+
 
 
 
