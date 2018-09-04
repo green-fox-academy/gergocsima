@@ -44,17 +44,17 @@ export class Pirate {
   }
 }
 
-let laci: Pirate = new Pirate('Laci');
-let bela: Pirate = new Pirate('Bela', 3);
-let jozso: Pirate = new Pirate('Jozso', 2);
-console.log(laci.alcLevel);
-laci.drinSomeRum();
-laci.drinSomeRum();
-console.log(laci.howsItGoingMate());
-console.log(laci.alcLevel);
-jozso.die();
-console.log(laci.drinSomeRum());
-console.log(laci.brawl(bela));
+// let laci: Pirate = new Pirate('Laci');
+// let bela: Pirate = new Pirate('Bela', 3);
+// let jozso: Pirate = new Pirate('Jozso', 2);
+// console.log(laci.alcLevel);
+// laci.drinSomeRum();
+// laci.drinSomeRum();
+// console.log(laci.howsItGoingMate());
+// console.log(laci.alcLevel);
+// jozso.die();
+// console.log(laci.drinSomeRum());
+// console.log(laci.brawl(bela));
 
 // And... if you get that far...
 
