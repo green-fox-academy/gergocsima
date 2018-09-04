@@ -1,39 +1,21 @@
-export class Animal {
-  hunger: number;
-  thirst: number;
+export abstract class Animal {
+
+  menu: string;
+  weight: number;
 
 
-  constructor(hunger: number = 50, thirst: number = 50) {
-    this.hunger = hunger;
-    this.thirst = thirst;
-
-
-  }
-  eat(): number {
-    return this.hunger--;
+  constructor(public name: string, public isDangerous: boolean) {
+    this.name = name;
+    this.isDangerous = isDangerous;
 
   }
-  drink(): number {
-    return this.thirst--;
+  breed() {
+    return `${this.breed}`
   }
-  play(): number {
-    return this.hunger++ , this.thirst++;
+  getName() {
+    return `${this.name}`
+  }
+  isDangerouss() {
+    return `${this.isDangerous}`
   }
 }
-
-//let zebra: Animal = new Animal();
-//console.log(zebra);
-//zebra.play();
-//console.log(zebra);
-//zebra.eat();
-//console.log(zebra);
-
-
-
-// Create an Animal class
-//   Every animal has a hunger value, which is a whole number
-// Every animal has a thirst value, which is a whole number
-// when creating a new animal object these values are created with the default 50 value
-// Every animal can eat() which decreases their hunger by one
-// Every animal can drink() which decreases their thirst by one
-// Every animal can play() which increases both by one
