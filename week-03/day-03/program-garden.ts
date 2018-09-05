@@ -21,3 +21,7 @@ console.log(tree1.getStatus());
 console.log(tree2.getStatus());
 garden.watering(40);
 garden.watering(70);
+
+
+//add plant list
+garden.addPlant(new Flower)

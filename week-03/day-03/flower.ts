@@ -12,10 +12,10 @@ export class Flower extends Plant {
   getStatus() {
     if (this.waterLevel < 5) {
       this.needsWater = true;
-      return `The ${this.color} Flower needs water.`;
+      console.log(`The ${this.color} Flower needs water.`);
     } else {
       this.needsWater = false;
-      return `The ${this.color} Flower doesn't need water`;
+      console.log(`The ${this.color} Flower doesn't need water`);
     }
   }
 }

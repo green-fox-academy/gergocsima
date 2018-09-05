@@ -1,4 +1,4 @@
-export class Plant {
+export abstract class Plant {
   color: string;
   absorption: number;
   waterLevel: number;
@@ -7,4 +7,6 @@ export class Plant {
   constructor(color: string) {
     this.color = color;
   }
+  abstract getStatus(): void
+
 }
