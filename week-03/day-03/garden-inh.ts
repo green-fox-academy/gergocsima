@@ -15,9 +15,7 @@ export class Garden {
     console.log(`Watering with ${waterToAdd}:`)
     let numberToWater = this.garden.filter((elem) => elem.needsWater === true).length;
     this.garden.forEach((elem) => {
-      if (elem.needsWater === true) {
-        elem.waterLevel += (waterToAdd / numberToWater) * elem.absorption;
-      }
+      elem.needsWater === true ? (elem.waterLevel += (waterToAdd / numberToWater) * elem.absorption) : elem.waterLevel;
     })
     return this.garden.forEach((elem) => elem.getStatus());
   }
