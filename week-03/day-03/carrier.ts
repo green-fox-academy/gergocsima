@@ -1,21 +1,23 @@
 import { Aircraft } from "./aircraft";
+import { F16 } from './f16';
+import { F35 } from './f35';
 
 export class Carrier {
   name: string;
   flights: Aircraft[];
   ammoStoraged: number;
   healthPoint: number;
-  ammoRemains: number;
+  ammoRemains = 0;
   startHealth: number;
+  allDamage = 0;
 
 
   constructor(name: string, ammoStoraged: number = 2000, healthPoint: number = 1200) {
     this.name = name;
     this.ammoStoraged = ammoStoraged;
     this.healthPoint = healthPoint;
-    this.ammoRemains = ammoStoraged;
     this.flights = [];
-    this.startHealth = healthPoint;
+
 
   }
 
@@ -23,23 +25,28 @@ export class Carrier {
     this.flights.push(aircrafToAdd);
   }
   fill() {
-    if (this.ammoRemains > this.ammoStoraged * 0.25) {
-      this.flights.forEach((elem) => elem.refill(this.ammoRemains))
-    } else if (this.ammoRemains < this.ammoStoraged * 0.25) {
+    let sumAmmo: number = 0;
+    for (let i: number = 0; i < this.flights.length; i++) {
+      this.flights[i].refill(this.ammoStoraged);
+    }
+    for (let j: number = 0; j < this.flights.length; j++) {
+      sumAmmo += this.flights[j].currentAmmo;
+      this.ammoStoraged -= sumAmmo;
+    }
+    if (this.ammoStoraged < sumAmmo) {
       for (let i: number = 0; i < this.flights.length; i++) {
         if (this.flights[i].isPriority() === true) {
-          this.flights[i].refill(this.ammoRemains);
+          this.flights[i].refill(this.ammoStoraged);
         }
       }
     }
-    else if (this.ammoStoraged === 0) {
-      return 'The ship is empty...!'
-    }
   }
   fight(carrier: Carrier): string {
-    let allDamage: number = 0;
-    this.flights.forEach(elem => allDamage += elem.fight());
-    carrier.healthPoint -= allDamage;
+
+    this.flights.forEach((elem) => this.allDamage += elem.fight());
+
+    carrier.healthPoint -= this.allDamage;
+
     if (carrier.healthPoint <= 0) {
       return `${carrier.name} : It's dead Jim`
     }
@@ -47,9 +54,9 @@ export class Carrier {
       return `${carrier.name}: Current status: ${carrier.healthPoint}`
     }
   }
-  getStatus(): string {
-    let totalPotentialDamage: number = 0;
-    this.flights.forEach(elem => totalPotentialDamage += elem.getDamage());
-    return `HP: ${this.healthPoint}, Aircraft count ${this.flights.length}, Ammo Storage: ${this.ammoStoraged}, Total damage: ${totalPotentialDamage} \n ${this.flights.map((elem) => '\n' + elem.getStatus())} `;
+  getStatus(): void {
+
+    this.flights.forEach((elem) => console.log(elem.getStatus()))
+    console.log(`HP:${this.healthPoint}, Aircraft count ${this.flights.length}, Ammo Storage: ${this.ammoStoraged}, Total damage: ${this.allDamage} \n)`);
   }
 }

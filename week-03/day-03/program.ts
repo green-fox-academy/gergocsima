@@ -4,10 +4,10 @@ import { F16 } from './f16'
 import { Carrier } from './carrier';
 
 
-// let f16: F16 = new F16()
-// console.log(f16);
-// let f35: F16 = new F35()
-// console.log(f35);
+let f16: F16 = new F16()
+//console.log(f16);
+let f35: F16 = new F35()
+//console.log(f35);
 
 // console.log('status: ' + f16.getStatus());
 // console.log('status: ' + f35.getStatus());
@@ -34,16 +34,23 @@ carrier2.add(new F16());
 carrier2.add(new F35());
 //console.log(carrier1);
 
-console.log(carrier1.getStatus());
-console.log(carrier2.getStatus());
-console.log(carrier1.fill());
-console.log(carrier2.fill());
-console.log(carrier1.getStatus());
-console.log(carrier2.getStatus());
-console.log(carrier1.fight(carrier2));
-console.log(carrier2.getStatus());
-console.log(carrier2.fight(carrier1));
-console.log(carrier2.getStatus());
-console.log(carrier1.fight(carrier2));
-console.log(carrier2.fight(carrier1));
-console.log(carrier1.fight(carrier2));
+// // console.log(carrier1.getStatus());
+// // console.log(carrier2.getStatus());
+carrier1.fill();
+carrier2.fill();
+carrier1.getStatus();
+carrier2.getStatus()
+carrier1.fight(carrier2);
+carrier2.fight(carrier1);
+carrier1.getStatus();
+carrier2.getStatus()
+// // console.log(carrier1.getStatus());
+// // console.log(carrier2.getStatus());
+// // console.log(carrier1.fight(carrier2));
+// console.log(carrier2.getStatus());
+// console.log(carrier1.fill());
+// console.log(carrier2.fight(carrier1));
+// console.log(carrier2.getStatus());
+// // console.log(carrier1.fight(carrier2));
+// // console.log(carrier2.fight(carrier1));
+// // console.log(carrier1.fight(carrier2));

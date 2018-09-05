@@ -1,33 +1,30 @@
 export class Aircraft {
   protected type: string;
-  protected ammoAmount: number;
-  protected baseDamage: number;
+  public currentAmmo: number;
+  public baseDamage: number;
   protected status: boolean;
-  protected maxAmmo: number;
+  public maxAmmo: number;
   protected ammoStorage: number;
 
   constructor(type: string, maxAmmo: number, baseDamage: number) {
     this.type = type;
-    this.ammoAmount = 0;
+    this.currentAmmo = 0;
     this.baseDamage = baseDamage;
     this.maxAmmo = maxAmmo;
   }
   fight(): number {
-    let damage: number = this.baseDamage * this.ammoAmount;
-    if (this.ammoAmount != 0) {
-      return damage;
-    }
-    this.ammoAmount = 0;
-
+    let damage: number = this.baseDamage * this.currentAmmo;
+    return damage;
   }
-  refill(ammoInShip: number): number {
-    if (ammoInShip < this.maxAmmo) {
-      this.ammoAmount = ammoInShip
+  refill(ammoStorage: number): number {
+    if (ammoStorage <= this.maxAmmo) {
+      this.currentAmmo += ammoStorage;
+      return ammoStorage - this.currentAmmo;
     }
     else {
-      this.ammoAmount = this.maxAmmo
+      this.currentAmmo = this.maxAmmo;
     }
-    return ammoInShip - this.ammoAmount;
+    return this.currentAmmo;
   }
 
   getType(): string {
@@ -35,7 +32,7 @@ export class Aircraft {
 
   }
   getStatus(): string {
-    return `Type: ${this.type},Ammo:${this.ammoAmount}, Base Damage: ${this.baseDamage}, All damage: ${this.baseDamage * this.ammoAmount}`;
+    return `Type: ${this.type},Ammo:${this.currentAmmo}, Base Damage: ${this.baseDamage}, All damage: ${this.baseDamage * this.currentAmmo}`;
   }
   isPriority(): boolean {
     if (this.type === "F35") {
@@ -43,9 +40,5 @@ export class Aircraft {
     } else {
       return false
     }
-  }
-  getDamage() {
-    return this.ammoAmount * this.baseDamage;
-
   }
 }
