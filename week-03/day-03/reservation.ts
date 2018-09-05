@@ -3,28 +3,53 @@ import { Reservationy } from "./reservationy";
 class Reservation implements Reservationy {
   DOW: string;
   reservationCode: string
-  constructor(DOW: string, reservationCode: string) {
-    this.DOW = DOW;
-    this.reservationCode = reservationCode;
+
+
+  constructor() {
+    this.reservationCode = this.getCodeBooking();
+    this.DOW = this.getDowBooking();
   }
 
-  getDowBooking(): string {
+  getDowBooking(): any {
     try {
-      return this.DOW;
+      let daysOfTheWeek: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+      return daysOfTheWeek[Math.floor(Math.random() * 7)];
     }
     catch (err) {
       throw new Error("Method not implemented.");
     }
   }
-  getCodeBooking(): string {
+  getCodeBooking(): any {
     try {
-      return this.reservationCode
+      let argsToUse: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+      let codeOfBook: string = '';
+      for (let i: number = 0; i <= 8; i++) {
+        codeOfBook += argsToUse[Math.floor(Math.random() * 36)];
+      }
+      return codeOfBook;
     } catch{
       throw new Error("Method not implemented.");
 
     }
   }
+  printCode() {
+    console.log(`Booking# ${this.getCodeBooking()} for ${this.getDowBooking()}`);
 
+  }
+}
+
+
+let reservation1: Reservation = new Reservation();
+reservation1.printCode();
+reservation1.printCode();
+reservation1.printCode();
+reservation1.printCode();
+reservation1.printCode();
+reservation1.printCode();
+reservation1.printCode();
+reservation1.printCode();
+reservation1.printCode();
+// console.log(`Booking# ${this.getCodeBooking} for ${this.getDowBooking}`);
 
 // Create a Reservation class by implementing all the features as required by the interface.
 // The booked reservations should look like the output below.
