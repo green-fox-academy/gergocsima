@@ -16,31 +16,28 @@ function print(dominoes: Domino[]) {
     console.log(value);
   });
 }
-// function snakeDominoes(domin): any {
-//   for (let i: number = 0; domin.length != 0; i++) {
-//     let snaked: any[] = [];
-//     snaked.push(domin[0]);
-//     if (domin[i].values[1] === snaked[i].values[0]) {
-//       snaked.push(domin[i])
-//     }
-//   }
-//   return domin;
-// }
-Domino.prototype = {
-  get Domino() {
-    return this.valueA + ',' + this.valueB;
-  },
-  set Domino
+let dominoes = initializeDominoes();
+function snakeDominoes(domin): any {
+  let snaked: any[] = [];
+  snaked.push(dominoes[0]);
+  for (let i: number = 0; i < domin.length; i++) {
+    for (let j: number = 0; j < domin.length; j++) {
+      if (snaked[i].values[1] === domin[j].values[0]) {
+        snaked.push(domin[j])
+      }
+    }
+  }
+  return snaked;
 }
 
 
 
 
-let dominoes = initializeDominoes();
+print(dominoes);
+console.log(dominoes.length);
+console.log(snakeDominoes(dominoes));
 /** You have the list of Dominoes */
 /** Order them into one snake where the adjacent dominoes have the same numbers on their adjacent sides */
 /** eg: [2, 4], [4, 3], [3, 5] ... */
 //snakeDominoes(dominoes);
-print(dominoes)
-//snakeDominoes(dominoes);
-get dominoes.values { }
+  //snakeDominoes(dominoes);
