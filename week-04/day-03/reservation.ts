@@ -13,7 +13,7 @@ class Reservation implements Reservationy {
   getDowBooking(): any {
     try {
       let daysOfTheWeek: string[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-      return daysOfTheWeek[Math.floor(Math.random() * 7)];
+      return daysOfTheWeek[Math.floor(Math.random() * daysOfTheWeek.length)];
     }
     catch (err) {
       throw new Error("Method not implemented.");
@@ -24,7 +24,7 @@ class Reservation implements Reservationy {
       let argsToUse: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
       let codeOfBook: string = '';
       for (let i: number = 0; i <= 8; i++) {
-        codeOfBook += argsToUse[Math.floor(Math.random() * 36)];
+        codeOfBook += argsToUse[Math.floor(Math.random() * argsToUse.length)];
       }
       return codeOfBook;
     } catch{
