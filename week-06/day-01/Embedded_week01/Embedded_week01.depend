@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1536582965 source:/Users/mac/Desktop/Embedded/Embedded_week01/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1536586657 source:/Users/mac/Desktop/Embedded/Embedded_week01/hello_me.c
+	<stdio.h>
+

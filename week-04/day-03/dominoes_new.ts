@@ -21,7 +21,7 @@ function snakeDominoes(domin): any {
   let snaked: any[] = [];
   snaked.push(dominoes[0]);
   for (let i: number = 0; i < domin.length; i++) {
-    for (let j: number = 0; j < domin.length; j++) {
+    for (let j: number = 1; j < domin.length; j++) {
       if (snaked[i].values[1] === domin[j].values[0]) {
         snaked.push(domin[j])
       }
