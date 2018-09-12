@@ -77,7 +77,10 @@ typings/
 .vscode/settings.json
 .vscode/tasks.json
 .vscode/launch.json
-!.src/main.c
+.src/
+.src/main.dms
+.main.dms
+!/main.c
 Makefile
 
 ### C ###
