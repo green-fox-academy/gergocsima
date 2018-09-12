@@ -78,9 +78,7 @@ typings/
 .vscode/tasks.json
 .vscode/launch.json
 !.src/main.c
-.src/main
-.src/
-./Makefile
+Makefile
 
 ### C ###
 # Prerequisites
