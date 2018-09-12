@@ -17,9 +17,6 @@ int main()
 		}
 		printf("Element : %d\n", pointer[i]);
 	};
-	for (int j = 0; j < 10; j++)
-	{
-		printf("Element:%d"; pointer)
-	}
+
 	return 0;
 }

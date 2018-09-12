@@ -8,13 +8,12 @@
 int main()
 {
 	int *pointer = NULL;
-	int array[10] = {0, 1, 2, 3, 4};
-	int size = sizeof(array) / sizeof(int);
-	int *ptr;
-	ptr = (int *)malloc(10 * size);
-	for (int i = 0; i < size; i++)
+	int size = sizeof(pointer) / sizeof(int);
+	pointer = (int *)malloc(5 * size);
+	for (int i = 0; i < 5; i++)
 	{
-		printf("%d\n", array[i]);
+		pointer[i] = i;
+		printf("%d\n", pointer[i]);
 	}
 
 	return 0;

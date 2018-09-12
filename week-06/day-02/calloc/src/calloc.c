@@ -9,14 +9,13 @@
 int main()
 {
 	int *pointer = NULL;
-	int array1[10] = {0, 1, 2, 3, 4};
-	int *pntr;
-	pntr = (int *)calloc(10, sizeof(array1) / sizeof(int));
+	pointer = (int *)calloc(10, sizeof(10, sizeof(int)));
 	printf("Calloc Print array:\n");
-	for (int i = 0; i < sizeof(array1) / sizeof(int); i++)
+	for (int i = 0; i < 5; i++)
 	{
-		printf("%d\n\t", array1[i]);
+		pointer[i] = i;
+		printf("Element:%d\n", pointer[i]);
 	}
-	free(pntr);
+	free(pointer);
 	return 0;
 }
