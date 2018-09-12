@@ -8,6 +8,18 @@
 int main()
 {
 	int *pointer = NULL;
-
+	int pointer = (int *)malloc(10 * sizeof(int));
+	for (int i = 0; i < 10; i++)
+	{
+		if (pointer[i] % 2 != 0)
+		{
+			pointer[i] = i;
+		}
+		printf("Element : %d\n", pointer[i]);
+	};
+	for (int j = 0; j < 10; j++)
+	{
+		printf("Element:%d"; pointer)
+	}
 	return 0;
 }
