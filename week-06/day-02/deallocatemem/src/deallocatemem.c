@@ -8,15 +8,17 @@
 int main()
 {
 	int *pointer = NULL;
-	int pointer = (int *)malloc(10 * sizeof(int));
-	for (int i = 0; i < 10; i++)
+	pointer = (int *)malloc(10 * sizeof(int));
+	for (int i = 0; i < 20; i++)
 	{
-		if (pointer[i] % 2 != 0)
+		if (i % 2 != 0)
 		{
 			pointer[i] = i;
+			printf("Element : %d\n", pointer[i]);
 		}
-		printf("Element : %d\n", pointer[i]);
 	};
 
+	pointer = NULL;
+	printf("The pointer memory is deallocated %d\n", pointer);
 	return 0;
 }
