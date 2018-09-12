@@ -80,7 +80,7 @@ typings/
 .src/
 .src/main.dms
 .main.dms
-!/main.c
+!main.c
 Makefile
 
 ### C ###
