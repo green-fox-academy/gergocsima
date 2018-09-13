@@ -9,7 +9,7 @@ int main()
     FILE *fptr;
     fptr = fopen("my-file.txt", "w");
 
-    fprintf(fptr, "This is a testing file for file writing and reading in c second.\n");
+    fprintf(fptr, "This is a testing file for file writing and reading in c second.\n Test second line\n");
     fclose(fptr);
     char c[1000];
     FILE *fptr2;
@@ -24,8 +24,21 @@ int main()
     // reads text until newline
     fscanf(fptr, "%[^\n]", c);
 
-    printf("Data from the file:\n%s", c);
+    printf("Data from the file, just first line:\n%s\n", c);
     fclose(fptr);
 
+    char s[1000];
+    FILE *fptr3;
+    char stringall;
+    fptr3 = fopen("my-file.txt", "r");
+    stringall = fgetc(fptr3);
+    printf("The all sentences printed together:\n\n");
+    while (stringall != EOF)
+    {
+        printf("%c", stringall);
+        stringall = fgetc(fptr3);
+    }
+    printf("\n\n");
+    fclose(fptr3);
     return 0;
 }
