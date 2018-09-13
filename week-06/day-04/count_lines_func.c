@@ -6,28 +6,11 @@
 // then returns the number of lines the file contains.
 // It should return zero if it can't open the file
 
-int lineCounter()
+int main()
 {
     char filename;
-    FILE *fptr;
-    char line[1000];
-    if ((fptr = fopen(filename, "r")) == NULL)
-    {
-        printf("Error! opening file");
-        // Program exits if file pointer returns NULL.
-        exit(1);
-    }
-
-    // reads text until newline
-    int counter = 0; /*Number of lines*/
-
-    while (fgets(line, sizeof(line), fptr) != NULL)
-    {
-        counter++;
-    }
-    int *counter = &counter;
-    printf("Number of lines in the file is %i", counter);
-
+    FILE *fptr = fopen("my-file_2nd.txt", "a");
+    fprintf(fptr, "%s\n", "Petrophyllum altum");
     fclose(fptr);
-    return;
+    return 0;
 }
