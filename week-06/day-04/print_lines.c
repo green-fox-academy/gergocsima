@@ -9,7 +9,7 @@ int main()
     FILE *fptr;
     fptr = fopen("my-file.txt", "w");
 
-    fprintf(fptr, "This is a testing file for file writing and reading in c second.\n Test second line\n");
+    fprintf(fptr, "This is a testing file for file writing and reading in c second.\nTest second line\n");
     fclose(fptr);
     char c[1000];
     FILE *fptr2;
