@@ -12,10 +12,18 @@
 
 // create a function which takes a char array as a parameter and
 // returns the distance between the first and last occurance of character 's'
-
+int distance(char *string);
 int main()
 {
-    char str[] = "This is a sample string";
+    char sentence[256];
+    gets(sentence);
+
+    distance(sentence);
+}
+int distance(char *string)
+{
+    // string = "This is a sample string";
+
     char *first, *last;
     char charToFind;
     int distance;
@@ -23,16 +31,16 @@ int main()
     scanf("%c", &charToFind);
     int posLast;
     int posFirst;
-    for (int i = 0; i < strlen(str); i++)
+    for (int i = 0; i < strlen(string); i++)
     {
-        if (str[i] == charToFind)
+        if (string[i] == charToFind)
         {
             posLast = i;
         }
     }
-    for (int j = strlen(str); j >= 0; j--)
+    for (int j = strlen(string); j >= 0; j--)
     {
-        if (str[j] == charToFind)
+        if (string[j] == charToFind)
         {
             posFirst = j;
         }
