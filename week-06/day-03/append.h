@@ -19,5 +19,6 @@ void appendAFunc(char in[])
         i++;
         j++;
     }
+    in[i] = '\0';
     printf("Concatenated string:%s", in);
 }
