@@ -24,13 +24,15 @@ int main()
         }
     }
 
+    printf("Merged array values from two separate arrays ones:\n");
+
     for (int j = 0; j < 10; j++)
     {
         if (arrayOdd[j] == 0)
         {
             arrayOdd[j] = pointer[j];
         }
-        printf("Merged array from two separate ones:%d\n", arrayOdd[j]);
+        printf("%d\n", arrayOdd[j]);
     }
 
     free(pointer);
