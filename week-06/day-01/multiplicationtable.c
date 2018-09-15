@@ -19,6 +19,7 @@ int main()
 {
     int num;
     printf("Please eneter a number:\n");
+
     scanf("%d", &num);
     for (int i = 1; i <= 10; i++)
     {
