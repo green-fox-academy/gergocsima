@@ -20,7 +20,7 @@ typedef struct
 
 int main()
 {
-    const int *myComp(struct Computer myComputer);
+
     struct Computer myComputer;
     myComputer.cpu_speed_GHz = 2.6;
     myComputer.ram_size_GB = 8;
