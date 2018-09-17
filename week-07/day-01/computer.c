@@ -25,6 +25,12 @@ int main()
     myComputer.cpu_speed_GHz = 2.6;
     myComputer.ram_size_GB = 8;
     myComputer.bits = 64;
-    printf("My computer is %.2f GHz with %d RAM and %d bits.", myComputer.cpu_speed_GHz, myComputer.ram_size_GB, myComputer.bits);
+    printf("My computer is %.2f GHz with %d RAM and %d bits.\n", myComputer.cpu_speed_GHz, myComputer.ram_size_GB, myComputer.bits);
+
+    Notebook myNotebook;
+    myNotebook.cpu_speed_GHz = 2.6;
+    myNotebook.ram_size_GB = 8;
+    myNotebook.bits = 64;
+    printf("My Notebook is %.2f GHz with %d RAM and it has a processor of %d bits.", myNotebook.cpu_speed_GHz, myNotebook.ram_size_GB, myNotebook.bits);
     return 0;
 }
