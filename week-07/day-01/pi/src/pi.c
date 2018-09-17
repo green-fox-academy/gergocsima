@@ -9,5 +9,6 @@
 int main()
 {
 	areaCalc(10);
+	circumference(10);
 	return 0;
 }
