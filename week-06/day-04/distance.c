@@ -4,14 +4,6 @@
 
 // create a function which takes a char array as a parameter and
 // returns the distance between the first and last occurance of character 's'
-
-#include <stdio.h>
-
-#include <stdio.h>
-#include <string.h>
-
-// create a function which takes a char array as a parameter and
-// returns the distance between the first and last occurance of character 's'
 int distance(char *string);
 int main()
 {
@@ -22,11 +14,10 @@ int main()
 }
 int distance(char *string)
 {
-    // string = "This is a sample string";
-
     char *first, *last;
     char charToFind;
-    int distance;
+    int *distance = NULL;
+    distance = (int)calloc(5, sizeof(int));
     printf("The distance of: ");
     scanf("%c", &charToFind);
     int posLast;

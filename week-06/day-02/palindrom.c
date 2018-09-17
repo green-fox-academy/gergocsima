@@ -14,12 +14,12 @@ char createPalindrom(char *input)
 {
     int sizeInput = strlen(input);
     char revInput[sizeInput];
-    int sizeOutput = (sizeInput * 2) - 1;
+    int sizeOutput = (sizeInput * 2);
     char output[sizeOutput];
 
     int j = 0;
     int h = 0;
-    for (int i = (strlen(input) - 1); i >= 0; i--)
+    for (int i = (sizeInput - 1); i >= 0; i--)
     {
         revInput[j] = input[i];
         j++;

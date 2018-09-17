@@ -1,4 +1,6 @@
-#include "greet.h"
+#include <stdio.h>
+#include <stdlib.h>
+void greetingFunction(char *any);
 
 // - Create a char array variable named `al` and assign the value `Greenfox` to it
 // - Create a function called `greet` that greets it's input parameter
@@ -10,6 +12,11 @@ int main()
 
     char al[] = "GreenFox";
 
-    greeting_function(al);
+    greetingFunction(al);
     return 0;
+}
+
+void greetingFunction(char *ab)
+{
+    printf("Greetings dear, %s !\n", ab);
 }
