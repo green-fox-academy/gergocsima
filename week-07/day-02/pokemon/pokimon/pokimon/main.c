@@ -1,6 +1,6 @@
 //
 //  main.c
-//  car_register_xcode
+//  pokimon
 //
 //  Created by Mac on 2018. 09. 18..
 //  Copyright © 2018. Mac. All rights reserved.

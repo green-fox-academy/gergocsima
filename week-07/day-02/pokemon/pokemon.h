@@ -34,4 +34,6 @@ typedef struct
 
 } Pokemon;
 int fasterPok(Pokemon *array, int array_length, double speed);
+char *strongestType(Pokemon *array, int array_length, float strength);
 int typeCounter(Pokemon *array, int array_length, enum PokemonType pok_t);
+float highestType(Pokemon *array, int array_length, enum PokemonType pok_t);

@@ -42,20 +42,19 @@ int main()
     pokemon4.age = 23;
     strcpy(pokemon4.name, "Zolcsi");
     pokemon4.speed = 8.9;
-    pokemon4.strength = 9.9;
-    pokemon4.type = FAIRY;
+    pokemon4.strength = 8.9;
+    pokemon4.type = DRAGON;
     Pokemon pokemon5;
     pokemon5.age = 40;
-    strcpy(pokemon1.name, "Bendegúz");
-    pokemon1.speed = 9.9;
-    pokemon1.strength = 9.9;
-    pokemon1.type = DRAGON;
+    strcpy(pokemon5.name, "Bendegúz");
+    pokemon5.speed = 9.9;
+    pokemon5.strength = 9.9;
+    pokemon5.type = DRAGON;
 
     Pokemon myPokemons[] = {pokemon1, pokemon2, pokemon3, pokemon4, pokemon5};
     printf("The number of faster pokemons are: %d\n", fasterPok(myPokemons, 5, 4.4));
-    printf("type%d\n", pokemon1.type);
-    printf("The strongest type of pokemon: %.2d\n", strongestType(myPokemons, 5, 11));
-    printf("The number of selected type pokemons are %d.\n", typeCounter(myPokemons, 5, WATER));
-
+    printf("The strongest type of pokemon: %s\n", strongestType(myPokemons, 5, 6));
+    printf("The number of selected type pokemons are %d.\n", typeCounter(myPokemons, 5, DRAGON));
+    printf("The maximum strength in the selected type is: %.2f\n", highestType(myPokemons, 5, DRAGON));
     return 0;
 }

@@ -1,20 +1,5 @@
 #include "pokemon.h"
 /*
- * The "pokemon"-s are stored in an array.
- *
- 
- * 2) Get type count
- *      - parameters:
- *          - array
- *          - array length
- *          - type
- *      - it returns the count of pokemons which are "type"
- * 3) Get strongest type
- *      - parameters:
- *          - array
- *          - array length
- *          - strength
- *      - it returns the type of the strongest pokemon
  * 4) Get maximal strength of a type
  *      - parameters:
  *          - array
@@ -66,4 +51,45 @@ int typeCounter(Pokemon *array, int array_length, enum PokemonType pok_t)
         }
     }
     return counter;
+}
+
+char *strongestType(Pokemon *array, int array_length, float strength)
+{
+    float counter = array[0].strength;
+    int strongest = array[0].type;
+    char *type[] = {"NORMAL", "FIRE", "WATER", "GRASS", "ELECTRIC", "ICE", "FIGHTING", "POISION", "GROUND", "FLYING", "PSYCHIC", "BUG", "ROCK", "GHOST", "DRAGON", "DARK", "STEEL", "FAIRY"};
+
+    if (array == NULL)
+    {
+        printf("The pokemon list you checked is empty");
+    }
+    else if (strength < 0.0 || strength > 10.0)
+    {
+        printf("The strength parameter you entered is invalid, try again, the range is between 0.0-10.0\n");
+    }
+    else
+    {
+        for (int i = 0; i < array_length; i++)
+        {
+            if (array[i].strength > counter)
+            {
+                counter = array[i].strength;
+                strongest = array[i].type;
+            }
+        }
+    }
+    return type[strongest];
+}
+
+float highestType(Pokemon *array, int array_length, enum PokemonType pok_t)
+{
+    float strength = array[0].strength;
+    for (int i = 0; i < array_length; i++)
+    {
+        if (array[i].type == pok_t && array[i].strength >= strength)
+        {
+            strength = array[i].strength;
+        }
+    }
+    return strength;
 }
