@@ -25,7 +25,7 @@ int main()
         printf("The x coordinate is: %d\n", coord[i].x);
         printf("The y coordinate is: %d\n", coord[i + 1].y);
     };
-    printf("Coordinate size:%d", sizeof(coord) / sizeof(coord[0]));
+    printf("Coordinate size:%lu", sizeof(coord) / sizeof(coord[0]));
     coorGen(3);
     return 0;
 }
