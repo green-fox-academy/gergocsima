@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 /*
@@ -23,35 +24,39 @@ struct house
     double area;
 };
 void worthIt(struct house *);
-struct house list[4];
+int numberOfWorth(struct house *list, int numHo);
 int main()
 {
     struct house house1;
-    stpcpy(house1.address, "Budapest XII,Fityfiritty utca 10");
+    strcpy(house1.address, "Budapest XII,Fityfiritty utca 10");
     house1.rooms = 4;
     house1.area = 100.50;
     house1.price = 161243.65;
     struct house house2;
-    stpcpy(house2.address, "Budapest II,Frasz utca 1");
+    strcpy(house2.address, "Budapest II,Frasz utca 1");
     house2.rooms = 3;
     house2.area = 80.50;
     house2.price = 130243.65;
     struct house house3;
-    stpcpy(house3.address, "Budapest X,Kakukk utca 16");
+    strcpy(house3.address, "Budapest X,Kakukk utca 16");
     house3.rooms = 2;
     house3.area = 60.50;
     house3.price = 81243.65;
     struct house house4;
-    stpcpy(house4.address, "Budapest II,Akác utca 5");
+    strcpy(house4.address, "Budapest II,Akác utca 5");
     house4.rooms = 5;
     house4.area = 120.50;
     house4.price = 191243.65;
     struct house house5;
-    stpcpy(house5.address, "Budapest I,Nyul utca 5");
+    strcpy(house5.address, "Budapest I,Nyul utca 5");
     house5.rooms = 4;
     house5.area = 100.50;
     house5.price = 40043.65;
-    worthIt(&house5);
+    worthIt(&house4);
+
+    struct house houseList[] = {house1, house2, house3, house4, house5};
+    printf("\nThe number of houses to buy:\n");
+    printf("%d", numberOfWorth(houseList, 5));
     return 0;
 }
 
@@ -66,3 +71,15 @@ void worthIt(struct house *ptr)
         printf("Do not worth to buy this house.");
     }
 }
+int numberOfWorth(struct house *list, int numHouse)
+{
+    int counter = 0;
+    for (int i = 0; i < numHouse; i++)
+    {
+        if (list[i].price < 400 * list[i].area)
+        {
+            counter++;
+        }
+    }
+    return counter;
+};
