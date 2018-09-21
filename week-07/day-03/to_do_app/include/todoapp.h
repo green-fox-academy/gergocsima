@@ -13,3 +13,4 @@ void printTask(List *array);
 void addTask(List *array);
 void completeTask(List *array);
 void removeTask(List *array);
+void clrscr();

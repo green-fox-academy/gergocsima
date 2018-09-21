@@ -38,16 +38,16 @@ void printTask(List *array)
 }
 void addTask(List *array)
 {
-	printf("Please add me a new task\n");
+	//printf("Please add me a new task\n");
 	int *counter = &taskNum;
 	++*counter;
 	scanf("%s", array[taskNum - 1].task);
-	printf("%d", taskNum);
+	//printf("%d", taskNum);
 }
 void removeTask(List *array)
 {
 	int index;
-	printf("Please add the number of the task to remove:\n");
+	//printf("Please add the number of the task to remove:\n");
 	scanf("%d", &index);
 	int *counter = &taskNum;
 	if (index >= taskNum + 1)
@@ -64,7 +64,7 @@ void removeTask(List *array)
 void completeTask(List *array)
 {
 	int index = 1;
-	printf("Please select a task to complete:\n");
+	//printf("Please select a task to complete:\n");
 	scanf("%d", &index);
 	for (int i = 0; i < taskNum; i++)
 	{
@@ -79,6 +79,10 @@ void completeTask(List *array)
 			printf("%d - [ ] %s\n", i + 1, array[i].task);
 		}
 	}
+}
+void clrscr()
+{
+	system("@cls ||clear ");
 }
 void result(List *array)
 {
