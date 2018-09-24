@@ -151,5 +151,7 @@ startup/
 CMSIS/
 HAL_Driver/
 Utilities/
-
+*.ld
+*.project
+*.cproject
 
