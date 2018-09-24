@@ -147,4 +147,9 @@ STM32F746G-DISCO.xml
 .settings/
 #ceedling
 build/
+startup/
+CMSIS/
+HAL_Driver/
+Utilities/
+
 
