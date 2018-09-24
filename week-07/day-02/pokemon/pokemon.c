@@ -1,14 +1,4 @@
 #include "pokemon.h"
-/*
- * 4) Get maximal strength of a type
- *      - parameters:
- *          - array
- *          - array length
- *          - type
- *      - it returns the highest strength among the "type" type pokemons
- *
- * Don't forget to handle invalid inputs (NULL pointers, invalid values etc.)
- */
 
 int fasterPok(Pokemon *array, int array_length, double speed)
 {

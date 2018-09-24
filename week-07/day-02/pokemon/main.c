@@ -1,23 +1,5 @@
 #include "pokemon.h"
 
-/*
- 
- * 3) Get strongest type
- *      - parameters:
- *          - array
- *          - array length
- *          - strength
- *      - it returns the type of the strongest pokemon
- * 4) Get maximal strength of a type
- *      - parameters:
- *          - array
- *          - array length
- *          - type
- *      - it returns the highest strength among the "type" type pokemons
- *
- * Don't forget to handle invalid inputs (NULL pointers, invalid values etc.)
- */
-
 int main()
 {
     Pokemon pokemon1;
@@ -52,7 +34,7 @@ int main()
     pokemon5.type = DRAGON;
 
     Pokemon myPokemons[] = {pokemon1, pokemon2, pokemon3, pokemon4, pokemon5};
-    printf("The number of faster pokemons are: %d\n", fasterPok(myPokemons, 5, 4.4));
+    printf("The number of faster pokemons are: %d\n", fasterPok(myPokemons, 5, 12));
     printf("The strongest type of pokemon: %s\n", strongestType(myPokemons, 5, 6));
     printf("The number of selected type pokemons are %d.\n", typeCounter(myPokemons, 5, DRAGON));
     printf("The maximum strength in the selected type is: %.2f\n", highestType(myPokemons, 5, DRAGON));
