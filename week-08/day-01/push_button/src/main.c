@@ -72,6 +72,9 @@ int main(void)
     while (1) {
         if (BSP_PB_GetState(BUTTON_WAKEUP)) {
             BSP_LED_On(LED_GREEN);
+            HAL_Delay(800);
+            BSP_LED_Off(LED_GREEN);
+            HAL_Delay(800);
         } else {
             BSP_LED_Off(LED_GREEN);
         }
