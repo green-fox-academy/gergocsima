@@ -95,42 +95,41 @@ int main(void) {
 	red.Speed = GPIO_SPEED_HIGH;
 	HAL_GPIO_Init(GPIOF, &red);
 
+	GPIO_InitTypeDef button;
+	button.Pin = GPIO_PIN_8;
+	button.Mode = GPIO_MODE_INPUT;
+	button.Pull = GPIO_NOPULL;
+	button.Speed = GPIO_SPEED_HIGH;
+	HAL_GPIO_Init(GPIOF, &button);
 
-	int buttonStatus = 0;
-	int mode = 0;
 	while (1) {
-		if (BSP_PB_GetState(BUTTON_WAKEUP) && buttonStatus != 1) {
-			buttonStatus = 1;
-			mode = (mode + 1) % 2;
-		}
-		if (BSP_PB_GetState(BUTTON_WAKEUP) != 1) {
-			buttonStatus = 0;
-		}
+	int stateOfPushButton = HAL_GPIO_ReadPin(GPIOF, GPIO_PIN_8);
 
-		if (mode == 0) {
+
+		if (stateOfPushButton == 1) {
 
 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
 			HAL_Delay(200);
 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET);
 			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);
 			HAL_Delay(200);
-			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_RESET);
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);
 			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
 			HAL_Delay(200);
 			//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
 
-		} else if (mode == 1) {
+		} else if (stateOfPushButton == 0) {
 
-			 HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
-			 HAL_Delay(200);
-			 HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_RESET);
-			 HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);
-			 HAL_Delay(200);
-			 HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_RESET);
-			 //HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
-			 HAL_Delay(200);
-			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
-			 HAL_Delay(200);
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
+			HAL_Delay(200);
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_9, GPIO_PIN_SET);
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_RESET);
+			HAL_Delay(200);
+			HAL_GPIO_WritePin(GPIOF, GPIO_PIN_10, GPIO_PIN_SET);
+			//HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+			HAL_Delay(200);
+			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET);
+			HAL_Delay(200);
 		}
 
 	}
