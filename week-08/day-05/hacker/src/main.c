@@ -21,7 +21,6 @@
  */
 int main()
 {
-	int binaryArray[10];
 	char ch, file_name[25];
 	int n = 0;
 	FILE *fp;
@@ -29,7 +28,7 @@ int main()
 	printf("Enter name of a file you wish to see\n");
 	gets(file_name);
 
-	fp = fopen(file_name, "r"); // read mode
+	fp = fopen(file_name, "r");
 
 	if (fp == NULL)
 	{
@@ -38,13 +37,18 @@ int main()
 	}
 
 	printf("The contents of %s file are:\n", file_name);
-
+	while ((ch = fgetc(fp)) != EOF)
+		printf("%c", ch);
+	fclose(fp);
+	fp = fopen(file_name, "r");
 	int lineNr = 0;
 	for (n = getc(fp); n != EOF; n = getc(fp))
 		if (n == '\n')
 			lineNr = lineNr + 1;
 
 	printf("number of lines in  %s   = %d\n", file_name, lineNr);
+	fclose(fp);
+	int binaryArray[lineNr];
 
 	return 0;
 }
