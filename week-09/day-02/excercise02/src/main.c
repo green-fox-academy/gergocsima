@@ -10,6 +10,8 @@ UART_HandleTypeDef uart_handle;
 TIM_HandleTypeDef TimeHandle;
 GPIO_InitTypeDef led1;
 TIM_OC_InitTypeDef sConfig;
+GPIO_InitTypeDef conf;                // create the configuration struct
+int buttonStatus = 0;
 
 #undef __GNUC__
 
@@ -89,19 +91,24 @@ int main(void) {
 	led1.Pull = GPIO_PULLDOWN;
 	led1.Speed = GPIO_SPEED_HIGH;
 	HAL_GPIO_Init(GPIOA, &led1);
+	//Configuring the GPIO pin to be input and generates interrupt
+	__HAL_RCC_GPIOI_CLK_ENABLE()
+	;         // enable the GPIOI clock
+	conf.Pin = GPIO_PIN_11;               // the pin is the 11
+	conf.Pull = GPIO_NOPULL;
+	conf.Speed = GPIO_SPEED_FAST;         // port speed to fast
+	/* Here is the trick: our mode is interrupt on rising edge */
+	conf.Mode = GPIO_MODE_IT_RISING;
+	//Interrupt priorities and enabling interrupt (NVIC)
+	/* assign the lowest priority to our interrupt line */
+	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
 
-	HAL_UART_Transmit(&uart_handle,"Waiting for push button\n" , 24, 1000);
+	/* tell the interrupt handling unit to process our interrupts */
+	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+	HAL_GPIO_Init(GPIOI, &conf);          // call the HAL init
+	HAL_UART_Transmit(&uart_handle, "\nWaiting for push button\n", 24, 1000);
 	while (1) {
 
-		if (BSP_PB_GetState(BUTTON_WAKEUP)) {
-			//HAL_TIM_PWM_ConfigChannel(&TimeHandle, &sConfig, TIM_CHANNEL_1);
-			//HAL_TIM_PWM_Start(&TimeHandle, TIM_CHANNEL_1);
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
-
-		} else if (BSP_PB_GetState(BUTTON_WAKEUP) != 1) {
-
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
-		}
 	}
 }
 
@@ -117,6 +124,22 @@ PUTCHAR_PROTOTYPE {
 
 	return ch;
 }
+void EXTI15_10_IRQHandler() {
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+
+	if (buttonStatus == 0) {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_SET);
+		buttonStatus = 1;
+	} else {
+		HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET);
+		buttonStatus = 0;
+	}
+	//HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_8);
+}
+
 
 /**
  * @brief  System Clock Configuration
@@ -139,39 +162,39 @@ PUTCHAR_PROTOTYPE {
  * @retval None
  */
 static void SystemClock_Config(void) {
-	RCC_ClkInitTypeDef RCC_ClkInitStruct;
-	RCC_OscInitTypeDef RCC_OscInitStruct;
+RCC_ClkInitTypeDef RCC_ClkInitStruct;
+RCC_OscInitTypeDef RCC_OscInitStruct;
 
-	/* Enable HSE Oscillator and activate PLL with HSE as source */
-	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-	RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-	RCC_OscInitStruct.HSIState = RCC_HSI_OFF;
-	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-	RCC_OscInitStruct.PLL.PLLM = 25;
-	RCC_OscInitStruct.PLL.PLLN = 432;
-	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
-	RCC_OscInitStruct.PLL.PLLQ = 9;
-	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
-		Error_Handler();
-	}
+/* Enable HSE Oscillator and activate PLL with HSE as source */
+RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+RCC_OscInitStruct.HSIState = RCC_HSI_OFF;
+RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+RCC_OscInitStruct.PLL.PLLM = 25;
+RCC_OscInitStruct.PLL.PLLN = 432;
+RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+RCC_OscInitStruct.PLL.PLLQ = 9;
+if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+	Error_Handler();
+}
 
-	/* activate the OverDrive to reach the 216 Mhz Frequency */
-	if (HAL_PWREx_EnableOverDrive() != HAL_OK) {
-		Error_Handler();
-	}
+/* activate the OverDrive to reach the 216 Mhz Frequency */
+if (HAL_PWREx_EnableOverDrive() != HAL_OK) {
+	Error_Handler();
+}
 
-	/* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
-	 clocks dividers */
-	RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK
-			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
-	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
-	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
-	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK) {
-		Error_Handler();
-	}
+/* Select PLL as system clock source and configure the HCLK, PCLK1 and PCLK2
+ clocks dividers */
+RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK
+		| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
+RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK) {
+	Error_Handler();
+}
 }
 
 /**
@@ -180,9 +203,9 @@ static void SystemClock_Config(void) {
  * @retval None
  */
 static void Error_Handler(void) {
-	/* User may add here some code to deal with this error */
-	while (1) {
-	}
+/* User may add here some code to deal with this error */
+while (1) {
+}
 }
 
 /**
@@ -193,28 +216,28 @@ static void Error_Handler(void) {
  * @retval None
  */
 static void MPU_Config(void) {
-	MPU_Region_InitTypeDef MPU_InitStruct;
+MPU_Region_InitTypeDef MPU_InitStruct;
 
-	/* Disable the MPU */
-	HAL_MPU_Disable();
+/* Disable the MPU */
+HAL_MPU_Disable();
 
-	/* Configure the MPU attributes as WT for SRAM */
-	MPU_InitStruct.Enable = MPU_REGION_ENABLE;
-	MPU_InitStruct.BaseAddress = 0x20010000;
-	MPU_InitStruct.Size = MPU_REGION_SIZE_256KB;
-	MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
-	MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
-	MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
-	MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
-	MPU_InitStruct.Number = MPU_REGION_NUMBER0;
-	MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
-	MPU_InitStruct.SubRegionDisable = 0x00;
-	MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+/* Configure the MPU attributes as WT for SRAM */
+MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+MPU_InitStruct.BaseAddress = 0x20010000;
+MPU_InitStruct.Size = MPU_REGION_SIZE_256KB;
+MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+MPU_InitStruct.SubRegionDisable = 0x00;
+MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
 
-	HAL_MPU_ConfigRegion(&MPU_InitStruct);
+HAL_MPU_ConfigRegion(&MPU_InitStruct);
 
-	/* Enable the MPU */
-	HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+/* Enable the MPU */
+HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
 
 /**
@@ -223,11 +246,11 @@ static void MPU_Config(void) {
  * @retval None
  */
 static void CPU_CACHE_Enable(void) {
-	/* Enable I-Cache */
-	SCB_EnableICache();
+/* Enable I-Cache */
+SCB_EnableICache();
 
-	/* Enable D-Cache */
-	SCB_EnableDCache();
+/* Enable D-Cache */
+SCB_EnableDCache();
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -241,12 +264,12 @@ static void CPU_CACHE_Enable(void) {
  */
 void assert_failed(uint8_t* file, uint32_t line)
 {
-	/* User can add his own implementation to report the file name and line number,
-	 ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+/* User can add his own implementation to report the file name and line number,
+ ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
 
-	/* Infinite loop */
-	while (1)
-	{
-	}
+/* Infinite loop */
+while (1)
+{
+}
 }
 #endif
