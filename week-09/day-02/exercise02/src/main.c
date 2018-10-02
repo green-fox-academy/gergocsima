@@ -11,7 +11,7 @@ TIM_HandleTypeDef TimeHandle;
 GPIO_InitTypeDef led1;
 TIM_OC_InitTypeDef sConfig;
 GPIO_InitTypeDef conf;                // create the configuration struct
-int buttonStatus = 0;
+volatile int  buttonStatus = 0;
 
 #undef __GNUC__
 
