@@ -180,3 +180,13 @@ int read_number_of_cards()
     }
     return card_number;
 }
+int random_number(int max_num)
+{
+    int num;
+    for (int i = 0; i < max_num; i++)
+    {
+        //srand(time(NULL));
+        num = rand() % max_num;
+    }
+    return num;
+}
