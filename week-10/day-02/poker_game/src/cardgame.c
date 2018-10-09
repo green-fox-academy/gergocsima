@@ -214,3 +214,18 @@ card_t *deck(card_t *card_deck)
 
     return card_deck;
 }
+card_t *generate_random_card(card_t *card)
+{
+    int card_number = 1;
+
+    for (int i = 0; i < card_number; i++)
+    {
+        card[i].suit = random_number(4);
+    }
+    for (int i = 0; i < card_number; i++)
+    {
+        card[i].deck = random_number(13);
+    }
+
+    return card;
+}
