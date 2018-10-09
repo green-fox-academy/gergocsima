@@ -190,3 +190,27 @@ int random_number(int max_num)
     }
     return num;
 }
+card_t *deck(card_t *card_deck)
+{
+    int n = 0;
+    int j = 0;
+    int i = 0;
+    for (int l = 0; l < 52; l++)
+    {
+        card_deck[l].suit = j;
+        card_deck[l].deck = i;
+        card_deck[l].status = get_satus(n);
+        j++;
+        i++;
+        if (j > 3)
+        {
+            j = 0;
+        }
+        if (i > 12)
+        {
+            i = 0;
+        }
+    }
+
+    return card_deck;
+}
