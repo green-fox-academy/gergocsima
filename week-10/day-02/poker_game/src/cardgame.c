@@ -229,3 +229,33 @@ card_t *generate_random_card(card_t *card)
 
     return card;
 }
+card_t *genearte_cards_table(int number, card_t *cards_in_hand, card_t *all_card, card_t *new_cards, int player_num)
+{
+    int counter = 0;
+    int index = 0;
+    int cards_to_use = 52 - (player_num * 2);
+    for (int i = 0; i < player_num; i++)
+    {
+        for (int j = 0; j < cards_to_use; j++)
+        {
+            if (cards_in_hand[i].suit != all_card[j].suit && cards_in_hand[i].deck != all_card[j].deck)
+            {
+                all_card[j].status = get_satus(1);
+                ++counter;
+            }
+        }
+    }
+    for (int i = 0; i < number; i++)
+    {
+        index = random_number(52);
+        while (all_card[index].status != USED)
+        {
+            index++;
+        }
+        new_cards[i].suit = all_card[index].suit;
+        new_cards[i].deck = all_card[index].deck;
+        new_cards[i].status = all_card[index].status;
+        all_card[index].status = get_satus(1);
+    }
+    return new_cards;
+}
