@@ -168,3 +168,15 @@ card_t *read_hands(const char *file_name, int *player_number)
 
     fclose(fp);
 }
+int read_number_of_cards()
+{
+    int card_number;
+    printf("\nPlease enter a number between 1 and 44.\n");
+    scanf("%d", &card_number);
+    if (card_number < 0 || card_number > 44)
+    {
+        printf("the number you eneterd is invalid.We generate a valid random number in order to continue the game\n");
+        card_number = random_number(44);
+    }
+    return card_number;
+}
