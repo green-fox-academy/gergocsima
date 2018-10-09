@@ -99,3 +99,38 @@ deck_t get_deck(char s)
     }
     return 0;
 }
+
+player_t *read_hands_from_file(const char *file_name, int *player_number)
+{
+    FILE *fp;
+    fp = fopen(file_name, "r");
+
+    player_t *players = (player_t *)malloc(100 * sizeof(player_t));
+
+    if (fp == NULL)
+    {
+        printf("Can't read the file\n");
+        return NULL;
+    }
+    char buffer[256];
+    char *token;
+    int counter = 0;
+
+    while (fgets(buffer, 256, fp))
+    {
+        token = strtok(buffer, " ");
+        strcpy(players[counter].name, token);
+        token = strtok(NULL, ",");
+
+        players[counter].suit_one = get_suite(token[0]);
+        players[counter].card_one = get_deck(token[1]);
+        token = strtok(NULL, "");
+        players[counter].suit_two = get_suite(token[0]);
+        players[counter].card_two = get_deck(token[1]);
+        ++counter;
+    }
+    *player_number = counter;
+    return players;
+
+    fclose(fp);
+}
