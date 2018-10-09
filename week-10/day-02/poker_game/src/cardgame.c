@@ -259,3 +259,38 @@ card_t *genearte_cards_table(int number, card_t *cards_in_hand, card_t *all_card
     }
     return new_cards;
 }
+player_t *decide_winner(player_t *players, card_t *new_cards, int number_of_players, int rand_card_num)
+{
+    player_t *winner = (player_t *)malloc(100 * sizeof(player_t));
+    int index = 0;
+    for (int i = 0; i < number_of_players; i++)
+    {
+        int points = 0;
+        if (players[i].card_one == players[i].card_two)
+        {
+            points += players[i].card_two;
+        }
+        for (int j = 0; j < rand_card_num; j++)
+        {
+            if (players[i].card_one == new_cards[j].deck)
+            {
+                points += new_cards[j].deck;
+            }
+            else if (players[i].card_two == new_cards[j].deck)
+            {
+                points += new_cards[j].deck;
+            }
+        }
+        players[i].points = points;
+    }
+    for (int m = 0; m < number_of_players; m++)
+    {
+        if (players[m].points > players[index].points)
+        {
+            index = m;
+        }
+    }
+    strcpy(winner[0].name, players[index].name);
+    winner[0].points = players[index].points;
+    return winner;
+}
