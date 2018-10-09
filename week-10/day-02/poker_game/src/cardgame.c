@@ -134,3 +134,37 @@ player_t *read_hands_from_file(const char *file_name, int *player_number)
 
     fclose(fp);
 }
+card_t *read_hands(const char *file_name, int *player_number)
+{
+    FILE *fp;
+    fp = fopen(file_name, "r");
+
+    card_t *card_hand = (card_t *)malloc(100 * sizeof(card_t));
+    if (fp == NULL)
+    {
+        printf("Can't read the file\n");
+        return NULL;
+    }
+    char buffer[256];
+    char *token;
+    int counter = 0;
+    int handin = 0;
+
+    while (fgets(buffer, 256, fp))
+    {
+        token = strtok(buffer, " ");
+        token = strtok(NULL, ",");
+        card_hand[handin].suit = get_suite(token[0]);
+        card_hand[handin].deck = get_deck(token[1]);
+        ++handin;
+        token = strtok(NULL, "");
+        card_hand[handin].suit = get_suite(token[0]);
+        card_hand[handin].deck = get_deck(token[1]);
+        ++handin;
+        ++counter;
+    }
+    *player_number = counter;
+    return card_hand;
+
+    fclose(fp);
+}
