@@ -101,5 +101,10 @@ int main()
 	// {
 	//     printf("Usable card %d:%u", i, usable_cards[i].suit);
 	// }
+	free(player);
+	free(card_deck);
+	free(cards_in_hand);
+	free(new_cards);
+	free(winner);
 	return 0;
 }
