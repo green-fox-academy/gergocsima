@@ -22,7 +22,7 @@ volatile int button_state = 0;
 volatile int timer2_state = 0;
 volatile int push_counter = 0;
 volatile int *cycle = &push_counter;
-
+volatile uint32_t channel =TIM_CHANNEL_1;
 UART_HandleTypeDef uart_handle;
 GPIO_InitTypeDef led;
 GPIO_InitTypeDef led2;
@@ -115,7 +115,7 @@ void tim3_init() {
 	TimeHandle2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	TimeHandle2.Init.CounterMode = TIM_COUNTERMODE_UP;
 	HAL_TIM_Base_Init(&TimeHandle2);
-	HAL_TIM_Base_Start(&TimeHandle2);
+	//HAL_TIM_Base_Start(&TimeHandle2);
 	HAL_TIM_PWM_Init(&TimeHandle2);
 	sConfig.OCMode = TIM_OCMODE_PWM1;
 	sConfig.Pulse = 10;
@@ -167,7 +167,7 @@ int main(void) {
 	button_init();
 	tim2_init();
 	tim3_init();
-	led_pwm_init();
+	//led_pwm_init();
 
 	printf(
 			"********************** WELCOME THE BUTTON PRESS COUNTER **********************\n");
@@ -202,14 +202,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			if (timer_blink == ONESEC || led_state == ON) {
 				HAL_TIM_Base_DeInit(&TimeHandle);
 				TIM2->ARR = 3333;
+				led_pwm_init();
 				HAL_TIM_Base_Start(&TimeHandle);
+				HAL_TIM_PWM_Start(&TimeHandle2,channel);
 				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET);
 				led_state = OFF;
 				timer_blink = TWOSEC;
 
 			} else if (led_state == OFF && timer_blink == TWOSEC) {
 				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET);
+				HAL_TIM_PWM_Stop(&TimeHandle2,channel);
 				HAL_TIM_Base_Stop(&TimeHandle);
+
 				HAL_TIM_Base_DeInit(&TimeHandle);
 				TIM2->ARR = 6666;
 				HAL_TIM_Base_Start(&TimeHandle);
