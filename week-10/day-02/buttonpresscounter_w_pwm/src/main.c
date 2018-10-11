@@ -24,7 +24,6 @@ volatile int push_counter = 0;
 volatile int *cycle = &push_counter;
 volatile uint32_t channel =TIM_CHANNEL_1;
 UART_HandleTypeDef uart_handle;
-GPIO_InitTypeDef led;
 GPIO_InitTypeDef led2;
 GPIO_InitTypeDef button;
 TIM_HandleTypeDef TimeHandle;
@@ -66,15 +65,6 @@ void init_uart() {
 	BSP_COM_Init(COM1, &uart_handle);
 }
 
-void led_green_init() {
-	//led green initialisation
-	led.Pin = GPIO_PIN_15;
-	led.Mode = GPIO_MODE_OUTPUT_PP;
-	led.Pull = GPIO_PULLDOWN;
-	led.Speed = GPIO_SPEED_HIGH;
-
-	HAL_GPIO_Init(GPIOA, &led);
-}
 void button_init() {	// CLOCK ENABLE FOR BUTTON
 	__HAL_RCC_GPIOI_CLK_ENABLE()
 	;
@@ -163,7 +153,6 @@ int main(void) {
 	BSP_LED_Init(LED_GREEN);
 	BSP_PB_Init(BUTTON_WAKEUP, BUTTON_MODE_GPIO);
 	init_uart();
-	led_green_init();
 	button_init();
 	tim2_init();
 	tim3_init();
@@ -205,12 +194,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 				led_pwm_init();
 				HAL_TIM_Base_Start(&TimeHandle);
 				HAL_TIM_PWM_Start(&TimeHandle2,channel);
-				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_SET);
 				led_state = OFF;
 				timer_blink = TWOSEC;
 
 			} else if (led_state == OFF && timer_blink == TWOSEC) {
-				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET);
 				HAL_TIM_PWM_Stop(&TimeHandle2,channel);
 				HAL_TIM_Base_Stop(&TimeHandle);
 
