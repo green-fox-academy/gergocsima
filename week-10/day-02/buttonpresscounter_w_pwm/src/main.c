@@ -11,7 +11,7 @@ typedef enum active_state {
 	START, IDLE
 } status_t;
 typedef enum program_phase {
-	BUTTON_COUNTER, LED, INFO, RESTART
+	BUTTON_COUNTER, LED,INFO, RESTART
 } phase_t;
 volatile status_t active = IDLE;
 volatile phase_t program_phase = BUTTON_COUNTER;
@@ -22,7 +22,7 @@ volatile int button_state = 0;
 volatile int timer2_state = 0;
 volatile int push_counter = 0;
 volatile int *cycle = &push_counter;
-volatile uint32_t channel = TIM_CHANNEL_1;
+volatile uint32_t channel =TIM_CHANNEL_1;
 UART_HandleTypeDef uart_handle;
 GPIO_InitTypeDef led2;
 GPIO_InitTypeDef button;
@@ -188,25 +188,22 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			HAL_NVIC_DisableIRQ(EXTI15_10_IRQn); // disable button interrupt as desired
 		}
 		if (active == IDLE && program_phase == INFO && *cycle != 0) {
-			printf("Program is in blinking state, wait for %d sec.\n",
-					3 * push_counter);
-			program_phase=LED;
-		}
-
+					printf("Program is in blinking state, wait for %d sec.\n",
+							3 * push_counter);
+					program_phase=LED;
+				}
 		if (active == IDLE && program_phase == LED && *cycle != 0) {
-
 			if (timer_blink == ONESEC || led_state == ON) {
-				push_counter = push_counter - 1;
 				HAL_TIM_Base_DeInit(&TimeHandle);
 				TIM2->ARR = 3333;
 				led_pwm_init();
 				HAL_TIM_Base_Start(&TimeHandle);
-				HAL_TIM_PWM_Start(&TimeHandle2, channel);
+				HAL_TIM_PWM_Start(&TimeHandle2,channel);
 				led_state = OFF;
 				timer_blink = TWOSEC;
 
 			} else if (led_state == OFF && timer_blink == TWOSEC) {
-				HAL_TIM_PWM_Stop(&TimeHandle2, channel);
+				HAL_TIM_PWM_Stop(&TimeHandle2,channel);
 				HAL_TIM_Base_Stop(&TimeHandle);
 
 				HAL_TIM_Base_DeInit(&TimeHandle);
