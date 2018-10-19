@@ -1,0 +1,322 @@
+#include "stm32f7xx.h"
+#include "stm32746g_discovery.h"
+#include "stm32746g_discovery_lcd.h"
+#include <string.h>
+#include <stdlib.h>
+
+UART_HandleTypeDef uart_handle; //uart typedef
+TIM_HandleTypeDef tim_handle; 	//pwm timer typedef
+TIM_HandleTypeDef tim_rpm; 		//timer typedef
+GPIO_InitTypeDef cooler; 		// cooler typedef
+GPIO_InitTypeDef rpm; 			//rpm typedef
+TIM_OC_InitTypeDef sConfig;		// pwm typedef
+TIM_IC_InitTypeDef sConfig2; 	// timer input capture
+GPIO_InitTypeDef conf;			//button typedef
+
+volatile int counter = 0;
+volatile int start = 0;
+volatile int stop = 0;
+volatile int state = 0;
+volatile int steps = 0;
+volatile int rpms = 0;
+volatile float hertz = 0;
+volatile float x = 0;
+char buffer[3];
+
+//#undef __GNUC__
+
+#ifdef __GNUC__
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+#else
+#define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+#endif /* __GNUC__ */
+
+static void SystemClock_Config(void);
+static void Error_Handler(void);
+static void MPU_Config(void);
+static void CPU_CACHE_Enable(void);
+
+void uart_setup() {
+	//uart setup
+	uart_handle.Init.BaudRate = 115200;
+	uart_handle.Init.WordLength = UART_WORDLENGTH_8B;
+	uart_handle.Init.StopBits = UART_STOPBITS_1;
+	uart_handle.Init.Parity = UART_PARITY_NONE;
+	uart_handle.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	uart_handle.Init.Mode = UART_MODE_TX_RX;
+	BSP_COM_Init(COM1, &uart_handle);
+
+}
+
+void cooler_setup() {
+
+	__HAL_RCC_GPIOB_CLK_ENABLE();
+
+	//cooler setup
+	cooler.Pin = GPIO_PIN_4;
+	cooler.Mode = GPIO_MODE_AF_PP;
+	cooler.Pull = GPIO_NOPULL;
+	cooler.Speed = GPIO_SPEED_HIGH;
+	cooler.Alternate = GPIO_AF2_TIM3;
+	HAL_GPIO_Init(GPIOB, &cooler);
+
+}
+
+void adc_setup() {
+
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+
+	// adc output - digital signal transported
+	rpm.Pin = GPIO_PIN_15;
+	rpm.Mode = GPIO_MODE_AF_PP;
+	rpm.Pull = GPIO_NOPULL;
+	rpm.Speed = GPIO_SPEED_HIGH;
+	rpm.Alternate = GPIO_AF1_TIM2;
+	HAL_GPIO_Init(GPIOA, &rpm);
+
+}
+
+void timer_setup() {
+
+	__HAL_RCC_TIM2_CLK_ENABLE()
+	;
+
+	//timer setup
+	tim_rpm.Instance = TIM2;
+	tim_rpm.Init.Period = 65535;
+	tim_rpm.Init.Prescaler = 0;
+	tim_rpm.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	tim_rpm.Init.CounterMode = TIM_COUNTERMODE_UP;
+	HAL_TIM_Base_Init(&tim_rpm);
+	HAL_TIM_Base_Start_IT(&tim_rpm);
+
+	//timer interrupt
+	HAL_NVIC_SetPriority(TIM2_IRQn, 0x0F, 0x00);
+	HAL_NVIC_EnableIRQ(TIM2_IRQn);
+
+}
+
+void timer_IC_setup() {
+	//timer input capture config
+	sConfig2.ICPolarity = TIM_ICPOLARITY_RISING;
+	sConfig2.ICPrescaler = TIM_ICPSC_DIV1;
+	sConfig2.ICSelection = TIM_ICSELECTION_DIRECTTI;
+	sConfig2.ICFilter = 0xF;
+
+	//timer input capture init & start
+	HAL_TIM_IC_ConfigChannel(&tim_rpm, &sConfig2, TIM_CHANNEL_1);
+	HAL_TIM_IC_Init(&tim_rpm);
+	HAL_TIM_IC_Start_IT(&tim_rpm, TIM_CHANNEL_1);
+
+	HAL_NVIC_SetPriority(USART1_IRQn, 0x0F, 0x00);
+	HAL_NVIC_EnableIRQ(USART1_IRQn);
+
+}
+
+void pwm_setup() {
+
+	__HAL_RCC_TIM3_CLK_ENABLE();
+
+	//pwm setup
+	tim_handle.Instance = TIM3;
+	tim_handle.Init.Period = 100;
+	tim_handle.Init.Prescaler = 1;
+	tim_handle.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	tim_handle.Init.CounterMode = TIM_COUNTERMODE_UP;
+	HAL_TIM_Base_Init(&tim_handle);
+	HAL_TIM_Base_Start_IT(&tim_handle);
+
+	//pwm config
+	sConfig.OCMode = TIM_OCMODE_PWM1;
+	sConfig.Pulse = 100;
+
+	//pwm init & start
+	HAL_TIM_PWM_ConfigChannel(&tim_handle, &sConfig, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Init(&tim_handle);
+	HAL_TIM_PWM_Start(&tim_handle, TIM_CHANNEL_1);
+
+}
+
+void button_setup() {
+
+	__HAL_RCC_GPIOI_CLK_ENABLE();
+
+	//button setup
+	conf.Pin = GPIO_PIN_11;
+	conf.Pull = GPIO_NOPULL;
+	conf.Speed = GPIO_SPEED_FAST;
+	conf.Mode = GPIO_MODE_IT_RISING;
+	HAL_GPIO_Init(GPIOI, &conf);
+
+	//button interrupt
+	HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0x0F, 0x00);
+	HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+}
+
+void lcd_setup() {
+	//lcd init
+	BSP_LCD_Init();
+	BSP_LCD_LayerDefaultInit(0, LCD_FB_START_ADDRESS);
+	BSP_LCD_SelectLayer(0);
+	BSP_LCD_DisplayOn();
+	BSP_LCD_Clear(LCD_COLOR_WHITE);
+
+}
+
+int main(void) {
+
+	MPU_Config();
+	CPU_CACHE_Enable();
+	HAL_Init();
+	SystemClock_Config();
+
+	uart_setup();
+	lcd_setup();
+	cooler_setup();
+	adc_setup();
+	timer_setup();
+	button_setup();
+	pwm_setup();
+	timer_IC_setup();
+
+	HAL_UART_Receive_IT(&uart_handle, buffer, 3);
+
+	while (1) {
+
+		char buff[100];
+		sprintf(buff, "%d", rpms);
+		BSP_LCD_ClearStringLine(4);
+		BSP_LCD_DisplayStringAt(0, 50, "RPM", CENTER_MODE);
+		BSP_LCD_DisplayStringAt(0, 66, "------", CENTER_MODE);
+		BSP_LCD_DisplayStringAtLine(4, (uint8_t *) buff);
+		//BSP_LCD_DisplayStringAtLine(0, (uint8_t *) buff);
+		HAL_Delay(100);
+	}
+}
+
+//timer irqhandler
+void TIM2_IRQHandler() {
+	HAL_TIM_IRQHandler(&tim_rpm);
+}
+//button irqhandler
+void EXTI15_10_IRQHandler() {
+	HAL_GPIO_EXTI_IRQHandler(conf.Pin);
+}
+//timer period elapsed callback
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+	counter++;
+}
+//timer input capture callback
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
+
+	if (state == 0) {
+		state++;
+	}
+
+	if (state == 1) {
+		start = __HAL_TIM_GET_COMPARE(htim, TIM_CHANNEL_1);
+
+		steps = counter * 65535 + stop - start;
+
+		x = (1.0 / 108000000) * steps;
+		hertz = 1.0 / x;
+		rpms = (hertz * 60) / 7;
+		counter = 0;
+		stop = __HAL_TIM_GET_COMPARE(htim, TIM_CHANNEL_1);
+	}
+}
+//button callback
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	printf("%d\r\n", rpms);
+}
+//uart irqhandler
+void USART1_IRQHandler() {
+	HAL_UART_IRQHandler(&uart_handle);
+
+}
+//uart callback
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+	HAL_UART_Receive_IT(&uart_handle, buffer, 3);
+	if (buffer[2] == '\0' || buffer[3] == '\0') {
+		TIM3->CCR1 = atoi(buffer);
+	}
+}
+
+PUTCHAR_PROTOTYPE {
+	HAL_UART_Transmit(&uart_handle, (uint8_t *) &ch, 1, 0xFFFF);
+
+	return ch;
+}
+static void SystemClock_Config(void) {
+	RCC_ClkInitTypeDef RCC_ClkInitStruct;
+	RCC_OscInitTypeDef RCC_OscInitStruct;
+
+	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+	RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+	RCC_OscInitStruct.HSIState = RCC_HSI_OFF;
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+	RCC_OscInitStruct.PLL.PLLM = 25;
+	RCC_OscInitStruct.PLL.PLLN = 432;
+	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+	RCC_OscInitStruct.PLL.PLLQ = 9;
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
+		Error_Handler();
+	}
+
+	if (HAL_PWREx_EnableOverDrive() != HAL_OK) {
+		Error_Handler();
+	}
+
+	RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK
+			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
+	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
+	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK) {
+		Error_Handler();
+	}
+}
+static void Error_Handler(void) {
+	while (1) {
+	}
+}
+static void MPU_Config(void) {
+	MPU_Region_InitTypeDef MPU_InitStruct;
+
+	HAL_MPU_Disable();
+
+	MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+	MPU_InitStruct.BaseAddress = 0x20010000;
+	MPU_InitStruct.Size = MPU_REGION_SIZE_256KB;
+	MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+	MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+	MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+	MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+	MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+	MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+	MPU_InitStruct.SubRegionDisable = 0x00;
+	MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+	HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+	HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+}
+static void CPU_CACHE_Enable(void) {
+	SCB_EnableICache();
+	SCB_EnableDCache();
+}
+
+#ifdef  USE_FULL_ASSERT
+void assert_failed(uint8_t* file, uint32_t line)
+{
+	while (1)
+	{
+	}
+}
+#endif
+
+
+

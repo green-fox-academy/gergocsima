@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="PeriodElap" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="periodelap"/>
+			<item value="if (BSP_PB_GetState(BUTTON_WAKEUP) &amp;&amp; buttonState != 1) {"/>
+			<item value="priority"/>
+			<item value="IRQHandler"/>
+			<item value="TIM"/>
+			<item value="tim"/>
+			<item value="hal_tim"/>
+			<item value="tim peri"/>
+		</list>
+		<list key="replacehistory">
+		</list>
+	</section>
+</section>

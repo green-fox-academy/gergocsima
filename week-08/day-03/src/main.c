@@ -117,7 +117,7 @@ int main(void) {
 	tdb.Pull = GPIO_PULLDOWN;
 	tdb.Speed = GPIO_SPEED_HIGH;
 	HAL_GPIO_Init(GPIOF, &tdb);
-	char sended;
+	uint8_t sended;
 
 	while (1) {
 		HAL_UART_Receive(&UartHandle, &sended, 1, 250);

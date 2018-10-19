@@ -36,7 +36,7 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	printf("The contents of %s file are:\n", file_name);
+	printf("\nThe contents of %s file are:\n", file_name);
 	while ((ch = fgetc(fp)) != EOF)
 		printf("%c", ch);
 	fclose(fp);
@@ -46,9 +46,17 @@ int main()
 		if (n == '\n')
 			lineNr = lineNr + 1;
 
-	printf("number of lines in  %s   = %d\n", file_name, lineNr);
+	printf("\n\nNumber of lines in  %s   = %d\n", file_name, lineNr);
 	fclose(fp);
 	int binaryArray[lineNr];
-
+	printf("%lu\n", sizeof(binaryArray) / sizeof(binaryArray[0]));
+	for (int i = 0; i < lineNr; i++)
+	{
+		fscanf(fp, "%s", &binaryArray[i] != EOF);
+	}
+	for (int i = 0; i < sizeof(binaryArray) / sizeof(binaryArray[0]); i++)
+	{
+		printf("\n\nThe %d element of the array is: %d\n", i + 1, binaryArray[i]);
+	}
 	return 0;
 }
