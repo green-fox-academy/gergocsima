@@ -27,11 +27,10 @@ volatile int rpm_max = 0;
 volatile int start_time = 0;
 volatile int end_time = 0;
 volatile int steps = 0;
-volatile float x = 0;
+volatile float T = 0;
 volatile float herz = 0;
 volatile int rpm = 0;
-
-volatile int v = 0;
+volatile int period = 65535;
 
 TIM_IC_InitTypeDef icHandler;
 GPIO_InitTypeDef Fan;
@@ -91,7 +90,7 @@ void tim2_init() {
 	__HAL_RCC_TIM2_CLK_ENABLE()
 	;
 	Tim2.Instance = TIM2;
-	Tim2.Init.Period = 65535;
+	Tim2.Init.Period = period;
 	Tim2.Init.Prescaler = 1;
 	Tim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	Tim2.Init.CounterMode = TIM_COUNTERMODE_UP;
@@ -210,16 +209,18 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 }
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
 
-		if (v==0) {
-			v++;
+		if (interrupt_ignore == IGNORE) {
+			overflow++;
+			HAL_TIM_IC_Start_IT(&Tim2, channel);
+			interrupt_ignore=DONOTIGNORE;
 	}
-	if (v==1) {
-		printf("fasz2\n");
+	if (interrupt_ignore == DONOTIGNORE) {
+		printf("ic_capture_callback \n");
 		start_time = __HAL_TIM_GET_COMPARE(&Tim2, channel);
-		steps = overflow * 65535 + end_time - start_time;
-		x = (1.0 / 108000000) * steps;
-		herz = 1.0 / x;
-		rpm = (herz * 60) / 7;
+		steps = overflow * period + end_time - start_time;
+		T = (1.0 / 108000000) * steps; // msec
+		herz = 1.0 / T;
+		rpm = (herz *60) / 7; //rpm
 		overflow = 0;
 		end_time = __HAL_TIM_GET_COMPARE(&Tim2, channel);
 
